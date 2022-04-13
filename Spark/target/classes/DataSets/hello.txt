@@ -1,0 +1,6 @@
+hello world
+hello spark
+hello flink
+nice spark
+nice flink
+nice kafka

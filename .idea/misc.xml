@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/sparkAll/pom.xml" />
+        <option value="$PROJECT_DIR$/flinkAll/pom.xml" />
+        <option value="$PROJECT_DIR$/Kafka/pom.xml" />
+        <option value="$PROJECT_DIR$/Hadoop/pom.xml" />
+        <option value="$PROJECT_DIR$/SparkAll/pom.xml" />
+        <option value="$PROJECT_DIR$/Spark/pom.xml" />
+        <option value="$PROJECT_DIR$/Flink/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/sparkAll/flinkAll/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>
