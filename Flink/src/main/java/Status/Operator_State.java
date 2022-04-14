@@ -1,15 +1,9 @@
-package Status;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.state
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/10 15:30
- */
+package Status;
+
 
 import Beans.SensorReading;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.checkpoint.ListCheckpointed;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -21,11 +15,10 @@ import java.util.List;
 public class Operator_State {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setParallelism(1);
-
-        // socket文本流
-        DataStream<String> inputStream = env.socketTextStream("localhost", 7777);
-
+        DataStream<String> inputStream = env.socketTextStream("192.168.1.10", 7777);
+        SingleOutputStreamOperator<Tuple2<Integer, Integer>> mapdata = inputStream.map(s ->
+                Tuple2.of(new Integer(s.split(" ")[0]), new Integer(s.split(" ")[1]))
+        );
         // 转换成SensorReading类型
         DataStream<SensorReading> dataStream = inputStream.map(line -> {
             String[] fields = line.split(",");
