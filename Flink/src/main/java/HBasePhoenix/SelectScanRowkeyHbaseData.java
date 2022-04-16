@@ -1,25 +1,32 @@
 package HBasePhoenix;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
-import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.CompareOperator;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.filter.RegexStringComparator;
+import org.apache.hadoop.hbase.filter.RowFilter;
 
-public class ScanHbaseData {
+public class SelectScanRowkeyHbaseData {
     public static void main(String[] args) throws Exception{
-        //  连接信息，连接对象
-        org.apache.hadoop.conf.Configuration conf = HBaseConfiguration.create();
-        conf.set("hbase.zookeeper.quorum","192.168.1.10:2181");
+        Configuration conf = new Configuration();
+        conf.set("hbase.zookeeper.quorum","192.168.1.10");
         Connection conn = ConnectionFactory.createConnection(conf);
-        Admin admin = conn.getAdmin();
-
-        //  连接Hbase数据库中的表
         Table gadaite = conn.getTable(TableName.valueOf("Gadaite"));
-        Scan scan = new Scan();
-        ResultScanner scanner = gadaite.getScanner(scan);
-
-        //  读取Hbase表中的数据
+        Scan scanrowkey = new Scan();
+        //  str$ 末尾匹配，相当于sql中的 %str ^str开头匹配，相当于sql中的str%
+        //  LESS <
+        //  LESS_OR_EQUAL <=
+        //  EQUAL =
+        //  NOT_EQUAL <>
+        //  GREATER_OR_EQUAL >=
+        //  GREATER >
+        //  NO_OP
+        RowFilter rowFilter = new RowFilter(CompareOperator.EQUAL, new RegexStringComparator("2$"));
+        scanrowkey.setFilter(rowFilter);
+        ResultScanner scanner = gadaite.getScanner(scanrowkey);
         for(Result sc:scanner){
             //  sc：对应cell集合，Hbase的一个列簇
             for (Cell c:sc.rawCells()){
