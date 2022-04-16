@@ -17,7 +17,7 @@ public class UpsertHbaseData {
         Connection conn = ConnectionFactory.createConnection(conf);
         Table gadaite = conn.getTable(TableName.valueOf("Gadaite"));
         ArrayList puts = new ArrayList();
-        Put put1 = new Put(Bytes.toBytes("101"));// 行键位
+        Put put1 = new Put(Bytes.toBytes("001"));// 行键位
         put1.addColumn(Bytes.toBytes("F1"), Bytes.toBytes("F11"), Bytes.toBytes("T1:T11"));//   列簇---字段(不需要再指定列簇)---值
         put1.addColumn(Bytes.toBytes("F1"), Bytes.toBytes("F12"), Bytes.toBytes("T1:T22"));
         put1.addColumn(Bytes.toBytes("F2"), Bytes.toBytes("F21"), Bytes.toBytes("T2:T21"));

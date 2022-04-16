@@ -12,7 +12,7 @@ public class DeleteHbaseDataOfFamily {
         Connection conn = ConnectionFactory.createConnection(conf);
         Table gadaite = conn.getTable(TableName.valueOf("Gadaite"));
         //  new Delete(Bytes.toBytes("这里填写行键是直接删除该行键对应的所有记录"));
-        Delete delete = new Delete(Bytes.toBytes("003"));
+        Delete delete = new Delete(Bytes.toBytes("001"));
         Delete delete1 = delete.addFamily(Bytes.toBytes("F1"));
         gadaite.delete(delete1);
         gadaite.close();

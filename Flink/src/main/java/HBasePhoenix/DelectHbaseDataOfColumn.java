@@ -14,9 +14,9 @@ public class DelectHbaseDataOfColumn {
         conf.set("hbase.zookeeper.quorum","192.168.1.10");
         Connection conn = ConnectionFactory.createConnection(conf);
         Table gadaite = conn.getTable(TableName.valueOf("Gadaite"));
-        Delete delete = new Delete(Bytes.toBytes("003"));
+        Delete delete = new Delete(Bytes.toBytes("001"));
         //  删除某个列簇下指定的某个字段时，使用addColum，并传递两个参数
-        Delete delete1 = delete.addColumn(Bytes.toBytes("F2"), Bytes.toBytes("F21"));
+        Delete delete1 = delete.addColumn(Bytes.toBytes("F2"), Bytes.toBytes("F22"));
         gadaite.delete(delete1);
         gadaite.close();
         conn.close();
