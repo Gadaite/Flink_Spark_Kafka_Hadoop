@@ -4,6 +4,7 @@ import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.*;
 
 public class SelectScanAllHbaseData {
     public static void main(String[] args) throws Exception{
