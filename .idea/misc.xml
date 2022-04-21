@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/SparkAll/pom.xml" />
         <option value="$PROJECT_DIR$/Spark/pom.xml" />
         <option value="$PROJECT_DIR$/Flink/pom.xml" />
+        <option value="$PROJECT_DIR$/Sqoop/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
