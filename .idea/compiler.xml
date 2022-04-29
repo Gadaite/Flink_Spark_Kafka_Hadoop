@@ -12,16 +12,18 @@
         <module name="Flink" />
         <module name="Hadoop" />
         <module name="Hive" />
+        <module name="Hbase" />
         <module name="Kafka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="Flink" target="1.8" />
-      <module name="Hadoop" target="1.5" />
+      <module name="Hadoop" target="1.8" />
+      <module name="Hbase" target="1.8" />
       <module name="Hive" target="1.8" />
-      <module name="Kafka" target="1.5" />
-      <module name="Spark" target="1.5" />
-      <module name="Sqoop" target="1.5" />
+      <module name="Kafka" target="1.8" />
+      <module name="Spark" target="1.8" />
+      <module name="Sqoop" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

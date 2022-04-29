@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/Flink/pom.xml" />
         <option value="$PROJECT_DIR$/Sqoop/pom.xml" />
         <option value="$PROJECT_DIR$/Hive/pom.xml" />
+        <option value="$PROJECT_DIR$/Hbase/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

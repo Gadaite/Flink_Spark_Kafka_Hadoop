@@ -1,0 +1,11 @@
+create "Gadaite","F1","F2"
+
+put "Gadaite",'001', "F1:F11",'F1.F11'
+put "Gadaite",'001', "F1:F12",'F1.F12'
+put "Gadaite",'001', "F2:F21",'F2.F21'
+put "Gadaite",'001', "F2:F22",'F2.F22'
+put "Gadaite",'002', "F1:F11",'G1.G11'
+put "Gadaite",'002', "F1:F12",'G1.G12'
+put "Gadaite",'002', "F2:F21",'G2.G21'
+put "Gadaite",'002', "F2:F22",'G2.G22'
+
