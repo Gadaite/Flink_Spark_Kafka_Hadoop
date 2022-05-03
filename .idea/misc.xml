@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/Sqoop/pom.xml" />
         <option value="$PROJECT_DIR$/Hive/pom.xml" />
         <option value="$PROJECT_DIR$/Hbase/pom.xml" />
+        <option value="$PROJECT_DIR$/ElasticSearch/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

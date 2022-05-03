@@ -10,13 +10,15 @@
         <module name="Spark" />
         <module name="Sqoop" />
         <module name="Flink" />
-        <module name="Hadoop" />
-        <module name="Hive" />
         <module name="Hbase" />
+        <module name="Hive" />
         <module name="Kafka" />
+        <module name="Hadoop" />
+        <module name="ElasticSearch" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="ElasticSearch" target="1.8" />
       <module name="Flink" target="1.8" />
       <module name="Hadoop" target="1.8" />
       <module name="Hbase" target="1.8" />
