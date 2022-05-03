@@ -50,6 +50,7 @@ public class QueryTestOne {
             System.out.println(account_number+" "+balance.toString()+" "+firstname+" "+lastname+" "+age.toString()+" "+gender+" "+
                     address+" "+employer+" "+email+" "+city+" "+state);
         }
+        restHighLevelClient.close();
 
     }
 }
