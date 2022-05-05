@@ -6,5 +6,6 @@ object Testkafka extends App {
     .appName("kafkatest").master("local[*]").enableHiveSupport().getOrCreate()
   val sc = spark.sparkContext
   sc.setLogLevel("ERROR")
-  val topic = "sparkapp"
+  val df = spark.readStream.format("kafka")
+  //  代码未完成
 }
