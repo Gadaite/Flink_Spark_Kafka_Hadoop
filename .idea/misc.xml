@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/Hive/pom.xml" />
         <option value="$PROJECT_DIR$/Hbase/pom.xml" />
         <option value="$PROJECT_DIR$/ElasticSearch/pom.xml" />
+        <option value="$PROJECT_DIR$/SparkJava/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
