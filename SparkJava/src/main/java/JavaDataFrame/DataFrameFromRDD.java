@@ -38,6 +38,7 @@ public class DataFrameFromRDD {
         Dataset<Row> dataFrame = sqlContext.createDataFrame(rddrow, schema);
         dataFrame.printSchema();
         dataFrame.show();
+        dataFrame.javaRDD().foreach(x -> System.out.println(x));
 
     }
 }
