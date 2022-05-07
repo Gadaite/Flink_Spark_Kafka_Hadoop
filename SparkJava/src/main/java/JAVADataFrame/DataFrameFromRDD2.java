@@ -1,4 +1,4 @@
-package JavaDataFrame;
+package JAVADataFrame;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;

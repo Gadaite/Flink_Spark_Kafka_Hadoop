@@ -1,4 +1,4 @@
-package JavaDataFrame;
+package JAVADataFrame;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
