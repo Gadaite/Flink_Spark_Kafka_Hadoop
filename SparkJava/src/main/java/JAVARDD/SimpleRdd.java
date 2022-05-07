@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Arrays;
 
-public class RddTwo {
+public class SimpleRdd {
     public static void main(String[] args) {
         SparkSession spark = SparkSession.builder().config("spark.ui.showConsoleProgress", "false").appName("RddTwo")
                 .master("local[*]").enableHiveSupport().getOrCreate();

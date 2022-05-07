@@ -4,7 +4,7 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
 
-public class RddOne {
+public class RangeToRdd {
     public static void main(String[] args) {
         SparkSession spark = SparkSession.builder().config("spark.ui.showConsoleProgress", "false")
                 .appName("RddOne").master("local[*]").enableHiveSupport().getOrCreate();
