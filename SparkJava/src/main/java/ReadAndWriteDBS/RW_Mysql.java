@@ -10,6 +10,7 @@ import java.util.Properties;
 
 public class RW_Mysql {
     public static void main(String[] args) {
+        System.setProperty("hadoop.home.dir","F:\\HadoopWin");
         SparkSession spark = SparkSession.builder().config("spark.uii.showConsoleProgresss", "false")
                 .appName("rwmysql").master("local[*]").enableHiveSupport().getOrCreate();
         JavaSparkContext jsc = JavaSparkContext.fromSparkContext(spark.sparkContext());
