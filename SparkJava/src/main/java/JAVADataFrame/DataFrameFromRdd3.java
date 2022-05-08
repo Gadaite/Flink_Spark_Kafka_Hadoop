@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 public class DataFrameFromRdd3 {
     public static void main(String[] args) {
+        System.setProperty("hadoop.home.dir","F:\\HadoopWin");
         SparkSession spark = SparkSession.builder().config("spark.ui.showConsoleProgress", "false")
                 .appName("DataFrameFromRdd3").master("local[*]").getOrCreate();
         JavaSparkContext jsc = JavaSparkContext.fromSparkContext(spark.sparkContext());

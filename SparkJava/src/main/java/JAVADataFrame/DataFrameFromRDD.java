@@ -14,6 +14,7 @@ import java.util.List;
 
 public class DataFrameFromRDD {
     public static void main(String[] args) {
+        System.setProperty("hadoop.home.dir","F:\\HadoopWin");
         SparkSession spark = SparkSession.builder().config("spark.ui.showConsoleProgress", "false").appName("DataFrameFromRDD")
                 .master("local[*]").enableHiveSupport().getOrCreate();
         spark.sparkContext().setLogLevel("ERROR");
