@@ -11,7 +11,7 @@ import java.util.Arrays;
 /*
     beanclass反射创建SparkDataframe
  */
-public class DataFrameFromUdfschema {
+public class DataFrameFromJavaBeanOne {
     public static void main(String[] args) {
         System.setProperty("hadoop.home.dir","F:\\HadoopWin");
         SparkSession spark = SparkSession.builder().config("spark.ui.showConsoleProgress", "false")
