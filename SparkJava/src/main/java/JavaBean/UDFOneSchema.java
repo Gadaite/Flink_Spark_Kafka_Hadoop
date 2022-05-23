@@ -2,12 +2,12 @@ package JavaBean;
 
 import java.io.Serializable;
 
-public class JJM implements Serializable {
+public class UDFOneSchema implements Serializable {
     private int no;
     private int age;
     private String name;
-    public JJM(){}
-    public JJM(int no, int age, String name) {
+    public UDFOneSchema(){}
+    public UDFOneSchema(int no, int age, String name) {
         this.no = no;
         this.age = age;
         this.name = name;

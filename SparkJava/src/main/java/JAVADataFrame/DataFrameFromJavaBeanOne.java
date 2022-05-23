@@ -1,6 +1,6 @@
 package JAVADataFrame;
 
-import JavaBean.JJM;
+import JavaBean.UDFOneSchema;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
@@ -22,15 +22,15 @@ public class DataFrameFromJavaBeanOne {
                 ("2,20,lisi"),
                 ("3,30,wangwu")
         ));
-        JavaRDD<JJM> objectJavaRDD = javaRDD.map(x -> {
+        JavaRDD<UDFOneSchema> objectJavaRDD = javaRDD.map(x -> {
             String[] strings = x.split(",");
-            JJM udfOneSchema = new JJM();
+            UDFOneSchema udfOneSchema = new UDFOneSchema();
             udfOneSchema.setNo(Integer.parseInt(strings[0]));
             udfOneSchema.setAge(Integer.parseInt(strings[1]));
             udfOneSchema.setName(String.valueOf(strings[2]));
             return udfOneSchema;
         });
-        Dataset<Row> dataFrame = spark.createDataFrame(objectJavaRDD, JJM.class);
+        Dataset<Row> dataFrame = spark.createDataFrame(objectJavaRDD, UDFOneSchema.class);
         dataFrame.show();
     }
 }

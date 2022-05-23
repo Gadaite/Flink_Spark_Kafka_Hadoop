@@ -1,15 +1,15 @@
 package CETC10S.Main20220523;
 
-import JavaBean.JJM;
+import JavaBean.UDFOneSchema;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListAddUdfRight {
     public static void main(String[] args) {
-        List<JJM> list = new ArrayList<>();
+        List<UDFOneSchema> list = new ArrayList<>();
         for (int i=0;i<=2;i++){
-            JJM udfOneSchema = new JJM();
+            UDFOneSchema udfOneSchema = new UDFOneSchema();
             list.add(udfOneSchema);
         }
         for (int i=0;i<list.size();i++){
@@ -17,7 +17,7 @@ public class ListAddUdfRight {
             list.get(i).setAge(i);
             list.get(i).setName("jiangjiming");
         }
-        for (JJM u: list){
+        for (UDFOneSchema u: list){
             System.out.println(u.toString());
         }
 
