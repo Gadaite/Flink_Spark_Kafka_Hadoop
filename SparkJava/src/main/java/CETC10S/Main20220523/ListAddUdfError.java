@@ -1,6 +1,6 @@
 package CETC10S.Main20220523;
 
-import JavaBean.UDFOneSchema;
+import JavaBean.JJM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class ListAddUdfError {
     public static void main(String[] args) {
-        List<UDFOneSchema> list = new ArrayList<>();
-        UDFOneSchema udfOneSchema = new UDFOneSchema();
+        List<JJM> list = new ArrayList<>();
+        JJM udfOneSchema = new JJM();
         udfOneSchema.setNo(1);
         for (int i=0;i<=2;i++){
             udfOneSchema.setName("zhangsan");
@@ -20,7 +20,7 @@ public class ListAddUdfError {
             list.add(udfOneSchema);
         }
         list.add(udfOneSchema);
-        for (UDFOneSchema i : list){
+        for (JJM i : list){
             System.out.println(String.valueOf(i.getAge()) + " " + i.getName() + " " + String.valueOf(i.getNo()));
         }
     }
