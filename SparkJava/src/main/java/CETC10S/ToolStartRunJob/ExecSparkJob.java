@@ -4,7 +4,7 @@ import CETC10S.ToolBaseSparkApp.BaseSparkENV;
 import CETC10S.ToolConnectDB.MysqlJDBC;
 import org.apache.spark.status.api.v1.BaseAppResource;
 
-public class ExecSparkJob extends MysqlJDBC implements BaseSparkENV {
+public class ExecSparkJob extends MysqlJDBC {
     public static void main(String[] args) throws Exception{
         MysqlJDBC jdbc = new MysqlJDBC();
         String driver = jdbc.init().getProperty("driver");
