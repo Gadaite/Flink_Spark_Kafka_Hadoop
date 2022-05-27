@@ -1,6 +1,6 @@
 package CETC10S.Main20220526;
 
-import CETC10S.ToolConnectDB.MysqlJDBC;
+import CETC10S.ToolConnectDB.MysqlJdbcCon;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -14,11 +14,11 @@ import java.util.*;
 public class HashMapAndGroup {
 
     public static void main(String[] args) throws Exception {
-        MysqlJDBC mysqlJDBC = new MysqlJDBC();
-        mysqlJDBC.init();
-        SparkSession spark = mysqlJDBC.getSparkSesssion("HashMapAndGroup", "ERROR");
+        MysqlJdbcCon mysqlJdbcCon = new MysqlJdbcCon();
+        mysqlJdbcCon.init();
+        SparkSession spark = mysqlJdbcCon.getSparkSesssion("HashMapAndGroup", "ERROR");
         JavaSparkContext jsc = JavaSparkContext.fromSparkContext(spark.sparkContext());
-        Dataset<Row> dataset = mysqlJDBC.GetDataSetByProperties(spark, "( select * from audi ) t");
+        Dataset<Row> dataset = mysqlJdbcCon.GetDataSetByProperties(spark, "( select * from audi ) t");
         JavaRDD<Row> audi = dataset.toJavaRDD();
         JavaPairRDD<String, Iterable<Row>> pairRDD = audi.groupBy(new GroupFunction());
         JavaRDD<HashMap<String, List<Row>>> mapRDD = pairRDD.map(new MMapFunction());
@@ -29,12 +29,12 @@ public class HashMapAndGroup {
                 rows.addAll(y);
             });
             x.keySet().forEach(y -> System.out.println(y));
-            Dataset<Row> resdf = spark.createDataFrame(jsc.parallelize(rows), StructType.fromDDL(mysqlJDBC.GetDDL(dataset)));
+            Dataset<Row> resdf = spark.createDataFrame(jsc.parallelize(rows), StructType.fromDDL(mysqlJdbcCon.GetDDL(dataset)));
             resdf.show();
             try {
                 Properties prop = new Properties();
-                prop.put("user",mysqlJDBC.init().getProperty("username"));
-                prop.put("password",mysqlJDBC.init().getProperty("pwd"));
+                prop.put("user", mysqlJdbcCon.init().getProperty("username"));
+                prop.put("password", mysqlJdbcCon.init().getProperty("pwd"));
                 String tablename = resdf.head().getString(resdf.head().fieldIndex("model"))
                         + "_" +
                         String.valueOf(resdf.head().getInt(resdf.head().fieldIndex("year")));

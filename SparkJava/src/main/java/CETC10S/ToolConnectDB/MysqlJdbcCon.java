@@ -10,10 +10,10 @@ import java.io.FileReader;
 import java.io.Serializable;
 import java.util.Properties;
 
-public class MysqlJDBC extends BaseSparkENV implements Serializable {
+public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
 
     Properties properties = new Properties();
-    public MysqlJDBC() {
+    public MysqlJdbcCon() {
     }
     public Properties init() throws Exception{
         FileReader fileReader = new FileReader("F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\resources\\mysql.properties");
@@ -62,12 +62,12 @@ public class MysqlJDBC extends BaseSparkENV implements Serializable {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception{
-        MysqlJDBC mysqlJDBC = new MysqlJDBC();
-        mysqlJDBC.init();
-        System.out.println(mysqlJDBC.init().getProperty("driver"));
-        System.out.println(mysqlJDBC.init().getProperty("url"));
-        System.out.println(mysqlJDBC.init().getProperty("pwd"));
-        System.out.println(mysqlJDBC.init().getProperty("username"));
+        MysqlJdbcCon mysqlJdbcCon = new MysqlJdbcCon();
+        mysqlJdbcCon.init();
+        System.out.println(mysqlJdbcCon.init().getProperty("driver"));
+        System.out.println(mysqlJdbcCon.init().getProperty("url"));
+        System.out.println(mysqlJdbcCon.init().getProperty("pwd"));
+        System.out.println(mysqlJdbcCon.init().getProperty("username"));
     }
 
 
