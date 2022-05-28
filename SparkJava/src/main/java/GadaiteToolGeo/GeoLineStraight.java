@@ -10,6 +10,7 @@ public class GeoLineStraight {
      */
     private double slope;
     private double intercept;
+    private double verticallon;
 
     public double getSlope() {
         return slope;
@@ -27,9 +28,14 @@ public class GeoLineStraight {
         this.intercept = intercept;
     }
 
+    public double getVerticallon() { return verticallon; }
+
+    public void setVerticallon(double verticallon) { this.verticallon = verticallon; }
+
     public GeoLineStraight(){}
-    public GeoLineStraight(double slope, double intercept) {
+    public GeoLineStraight(double slope, double intercept,double verticallon) {
         this.slope = slope;
         this.intercept = intercept;
+        this.verticallon = verticallon;
     }
 }

@@ -31,19 +31,30 @@ public class GeoIFPointOnLineStraight {
         double line_lat2 = geoLineSegment.getGeoCoordinate2().getLat();
         double point_lon = geoCoordinate.getLon();
         double point_lat = geoCoordinate.getLat();
-        /**
-         * 斜率和截距
-         */
-        double slope = (line_lat1 - line_lat2) / (line_lon1 - line_lon2);
-        double intercept = line_lat1 - (slope * line_lon1);
-        /**
-         * 比较计算值与实际值
-         */
-        double Calculated = slope * point_lon + intercept;
-        if (Math.abs(Calculated - point_lat) <= Math.abs(error)){
-            return true;
+        if (line_lon1 == line_lon2){
+            /**
+             * 斜率不存在时
+             */
+            if (point_lon == line_lon1){
+                return true;
+            }else {
+                return false;
+            }
         }else {
-            return false;
+            /**
+             * 斜率和截距
+             */
+            double slope = (line_lat1 - line_lat2) / (line_lon1 - line_lon2);
+            double intercept = line_lat1 - (slope * line_lon1);
+            /**
+             * 比较计算值与实际值
+             */
+            double Calculated = slope * point_lon + intercept;
+            if (Math.abs(Calculated - point_lat) <= Math.abs(error)){
+                return true;
+            }else {
+                return false;
+            }
         }
     }
 }

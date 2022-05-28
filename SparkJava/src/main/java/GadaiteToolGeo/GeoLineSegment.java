@@ -38,15 +38,26 @@ public class GeoLineSegment {
      * @return
      */
     public GeoLineStraight ConvertToStraightLineModel(){
+
         double point_lon1 = geoCoordinate1.getLon();
         double point_lat1 = geoCoordinate1.getLat();
         double point_lon2 = geoCoordinate2.getLon();
         double point_lat2 = geoCoordinate2.getLat();
-        /**
-         * 斜率和截距
-         */
-        double slope = (point_lat1 - point_lat2) / (point_lon1 - point_lon2);
-        double intercept = point_lat1 - (slope * point_lon1);
-        return new GeoLineStraight(slope,intercept);
+
+        if (point_lon1 != point_lon2 ){
+            /**
+             * 斜率和截距
+             * 斜率存在时
+             */
+            double slope = (point_lat1 - point_lat2) / (point_lon1 - point_lon2);
+            double intercept = point_lat1 - (slope * point_lon1);
+            return new GeoLineStraight(slope,intercept,-9999);
+        }else {
+            /**
+             * 斜率不存在时
+             */
+            return new GeoLineStraight(-9999,-9999,point_lon1);
+        }
+
     }
 }
