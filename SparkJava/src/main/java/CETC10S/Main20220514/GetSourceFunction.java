@@ -1,6 +1,6 @@
 package CETC10S.Main20220514;
 
-import CETC10S.ToolConnectDB.MysqlJdbcCon;
+import GadaiteToolConnectDB.MysqlJdbcCon;
 
 public class GetSourceFunction extends MysqlJdbcCon {
     

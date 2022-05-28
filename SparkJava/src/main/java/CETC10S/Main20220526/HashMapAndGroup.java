@@ -1,6 +1,6 @@
 package CETC10S.Main20220526;
 
-import CETC10S.ToolConnectDB.MysqlJdbcCon;
+import GadaiteToolConnectDB.MysqlJdbcCon;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;

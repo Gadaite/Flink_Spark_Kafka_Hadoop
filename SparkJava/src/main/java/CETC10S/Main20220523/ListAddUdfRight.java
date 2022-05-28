@@ -1,6 +1,6 @@
 package CETC10S.Main20220523;
 
-import JavaBean.UDFOneSchema;
+import NoteJavaBean.UDFOneSchema;
 
 import java.util.ArrayList;
 import java.util.List;
