@@ -105,7 +105,7 @@ public class LonLatToGeoHash {
      * @param precise 精度
      * @return GeoHash串
      */
-    public String getGeoHash(double lat, double lng, int precise) {
+    public String getGeoHash(double lon, double lat, int precise) {
         if (precise < 1 || precise > 9) {
             return "";
         }
@@ -115,6 +115,6 @@ public class LonLatToGeoHash {
         } else {
             lngLength = latLength + 1;
         }
-        return encode(lat, lng);
+        return encode(lat, lon);
     }
 }
