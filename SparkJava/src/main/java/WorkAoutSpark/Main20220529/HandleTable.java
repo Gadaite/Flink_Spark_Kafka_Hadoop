@@ -13,6 +13,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.types.StructType;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -66,5 +67,11 @@ public class HandleTable extends MysqlConnect implements Serializable {
          */
         List<Row> rows = LonLatRDD.take(5);
         rows.forEach(x -> System.out.println(x));
+        /**
+         * 生成Dataset进行查看
+         */
+        String ddl = "`Column1` INT,`start_date` STRING,`start_station` String,`end_date` STRING,`end_station` String,`duration_sec` INT,`is_member` INT";
+        Dataset<Row> res = spark.createDataFrame(LonLatRDD, StructType.fromDDL(ddl));
+        res.show();
     }
 }
