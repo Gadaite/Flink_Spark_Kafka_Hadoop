@@ -3,7 +3,7 @@ package WorkAoutSpark.Main20220529;
 /**
  * table name:  BIXIMontrealOD2014
  * author name: Gadaite
- * create time: 2022-05-29 15:19:58
+ * create time: 2022-05-29 21:16:15
  */ 
 public class Biximontrealod2014 extends EntityHelper{
 

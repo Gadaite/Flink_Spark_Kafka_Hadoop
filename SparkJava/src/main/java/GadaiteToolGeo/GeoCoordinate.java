@@ -1,11 +1,13 @@
 package GadaiteToolGeo;
 
+import java.io.Serializable;
+
 /**
  * made by Gadaite
  * 定义坐标模型
  * 定义坐标点的类(经度，纬度)
  */
-public class GeoCoordinate {
+public class GeoCoordinate implements Serializable {
     private double lon;
     private double lat;
 
