@@ -57,17 +57,14 @@ public class HandleTable extends MysqlConnect implements Serializable {
          */
         JavaRDD<HashMap<Integer, GeoCoordinate>> map = Station2014RDD.map(new StationHashMap());
         List<HashMap<Integer, GeoCoordinate>> collect = map.collect();
-        for (HashMap<Integer, GeoCoordinate> tmp : collect){
-            for (Map.Entry<Integer, GeoCoordinate> tmptmp : tmp.entrySet()){
-                System.out.print(tmptmp.getKey());
-                System.out.print(": " + tmptmp.getValue().getLon() + " , " + tmptmp.getValue().getLat());
-            }
-            System.out.println();
-        }
-
         /**
          * 将BIXIMontrealOD2014表中的start_station_code以及end_station_code转换经纬度数据
          */
-        OD2014RDD.map(new TransToLonLat());
+        JavaRDD<Row> LonLatRDD = OD2014RDD.map(new TransToLonLat(collect));
+        /**
+         * RDD打印前5行数据
+         */
+        List<Row> rows = LonLatRDD.take(5);
+        rows.forEach(x -> System.out.println(x));
     }
 }
