@@ -1,27 +1,53 @@
 package WorkAoutSpark.Main20220529;
 
-import GadaiteToolConnectDB.MysqlConnect;
+/**
+ * made by Gadaite
+ * 测试自定义工具类的使用情况
+ */
 
-import java.sql.ResultSet;
+import GadaiteToolConnectDB.AutoCreateMysqlBean;
+import GadaiteToolConnectDB.MysqlConnect;
+import GadaiteToolConnectDB.MysqlJdbcCon;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.Function;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class HandleTable extends MysqlConnect {
     public static void main(String[] args) throws Exception{
-        MysqlConnect connect = new MysqlConnect();
-        ResultSet resultSet = connect.MysqlQuery("select * from `CETC10S`.`flights` limit 1000000");
-        List list = connect.GetResultSetColumnName(resultSet);
         /**
-         * 选取指定列的数据：前25列
+         * 调用封装类，自动创建JavaBean文件到当前目录
          */
-        List ChooseColumns = new ArrayList<>();
-        for (int i = 0;i < 25 ; i++){
-            ChooseColumns.add(list.get(i));
+        String FilePath = "F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\java\\";
+        String PackageName = "WorkAoutSpark.Main20220529";
+        AutoCreateMysqlBean createMysqlBean = new AutoCreateMysqlBean();
+        AutoCreateMysqlBean.basePath = FilePath;
+        AutoCreateMysqlBean.packageOutPath = PackageName;
+        File file = new File("F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\java\\WorkAoutSpark\\Main20220529\\Audi.java");
+        if (!file.getParentFile().exists()) {
+            createMysqlBean.generateTables = new String[]{"audi"};
+            createMysqlBean.generate();
+        }else {
+            System.out.println("Audi.Java is alreadly exists !");
         }
-        List<Map> maps = connect.GetREsultSetMapData(resultSet);
-        System.out.println(maps.size());
-        FlightsDDL flightsDDL = new FlightsDDL();
-        System.out.println(flightsDDL.GetDDL());
+        /**
+         * 调用封装类，使用创建Spark执行环境，并获取数据源
+         */
+        MysqlJdbcCon con = new MysqlJdbcCon();
+        SparkSession spark = con.getSparkSesssion("handleTable", "ERROR");
+        Dataset<Row> dataset = con.GetDataSetByProperties(spark, "select * from audi limit 5");
+        dataset.show();
+        dataset.printSchema();
+        /**
+         * 测试生成的JavaBean文件的可用性
+         */
+        JavaRDD<Row> audiRDD = dataset.toJavaRDD();
+        JavaRDD<Audi> audimodelRDD = audiRDD.map(new MMapFunction());
+        audimodelRDD.foreach(x -> System.out.println(x));
+
     }
 }

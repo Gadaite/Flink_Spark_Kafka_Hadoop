@@ -47,17 +47,17 @@ public class AutoCreateMysqlBean {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     //指定实体生成所在包的路径
-    private static String basePath = "F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\java\\";
+    public static String basePath = "F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\java\\";
     //指定包名
-    private static String packageOutPath = "GadaiteJavaBeanFromDBS";
+    public static String packageOutPath = "GadaiteJavaBeanFromDBS";
     //作者名字
     private String authorName = "Gadaite";
     //指定需要生成的表的表名，全部生成设置为null
-    private String[] generateTables = {};
+    public String[] generateTables = {};
     //主键
     private static String pk;
 
-    private AutoCreateMysqlBean() {
+    public AutoCreateMysqlBean() {
     }
 
     /**
@@ -248,7 +248,7 @@ public class AutoCreateMysqlBean {
      * @return
      */
     private static String pkgDirName() {
-        String dirName = basePath + packageOutPath.replace(".", "/");
+        String dirName = basePath + packageOutPath.replace(".", "\\");
         File dir = new File(dirName);
         if (!dir.exists()) {dir.mkdirs();System.out.println("mkdirs dir { " + dirName + " }");}
         return dirName;
@@ -281,7 +281,7 @@ public class AutoCreateMysqlBean {
     /**
      * @description 生成方法
      */
-    private void generate() throws Exception {
+    public void generate() throws Exception {
         //与数据库的连接
         Connection con;
         PreparedStatement pStemt = null;
@@ -348,16 +348,21 @@ public class AutoCreateMysqlBean {
             pw.close();
     }
 
-    public static void main(String[] args) {
-        AutoCreateMysqlBean instance = new AutoCreateMysqlBean();
-        String[] tablesname = {"audi","airlines","airports","flights"};
-        instance.generateTables = tablesname;
-        try {
-            instance.generate();
-            System.out.println("generate Entity to classes successful!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    /**
+     * made by Gadaite
+     * 用于代码测试时候使用
+     * @param args
+     */
+//    public static void main(String[] args) {
+//        AutoCreateMysqlBean instance = new AutoCreateMysqlBean();
+//        String[] tablesname = {"audi","airlines","airports","flights"};
+//        instance.generateTables = tablesname;
+//        try {
+//            instance.generate();
+//            System.out.println("generate Entity to classes successful!");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
 
