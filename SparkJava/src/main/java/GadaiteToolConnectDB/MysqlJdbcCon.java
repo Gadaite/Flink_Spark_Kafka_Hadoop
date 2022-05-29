@@ -10,6 +10,10 @@ import java.io.FileReader;
 import java.io.Serializable;
 import java.util.Properties;
 
+/**
+ * made by Gadaite
+ * 使用Spark方式连接数据，获取数据集
+ */
 public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
 
     Properties properties = new Properties();
@@ -22,6 +26,10 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
         return properties;
     }
 
+    public MysqlJdbcCon(Properties properties) {
+        this.properties = properties;
+    }
+
     /**
      *手动1输入相关参数，返回数据源
      */
@@ -31,7 +39,7 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
                 .option("url", "jdbc:mysql://" + url + "/" + databasename)
                 .option("user", user)
                 .option("password", password)
-                .option("dbtable", sql_or_tablename).load();
+                .option("dbtable", "( " + sql_or_tablename + " ) t").load();
         return dataset;
     }
 
@@ -41,13 +49,14 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
      * @param sql_or_tablename
      * @return
      */
-    public Dataset<Row> GetDataSetByProperties(SparkSession sparkSession, String sql_or_tablename){
+    public Dataset<Row> GetDataSetByProperties(SparkSession sparkSession, String sql_or_tablename) throws Exception {
+        init();
         Dataset<Row> dataset = sparkSession.read().format("jdbc")
                 .option("driver",properties.getProperty("driver"))
                 .option("url", properties.getProperty("url"))
                 .option("user", properties.getProperty("username"))
                 .option("password", properties.getProperty("pwd"))
-                .option("dbtable", sql_or_tablename).load();
+                .option("dbtable", "( " + sql_or_tablename + " ) t").load();
         return dataset;
     }
     /**
@@ -56,21 +65,6 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
     public String GetDDL(Dataset dataset){
         return dataset.schema().toDDL();
     }
-    /**
-     * x下面是测试时使用的代码
-     * @param args
-     * @throws Exception
-     */
-//    public static void main(String[] args) throws Exception{
-//        MysqlJdbcCon mysqlJdbcCon = new MysqlJdbcCon();
-//        mysqlJdbcCon.init();
-//        System.out.println(mysqlJdbcCon.init().getProperty("driver"));
-//        System.out.println(mysqlJdbcCon.init().getProperty("url"));
-//        System.out.println(mysqlJdbcCon.init().getProperty("pwd"));
-//        System.out.println(mysqlJdbcCon.init().getProperty("username"));
-//    }
-
-
     @Override
     public String ExecuteFunction() throws Exception {
         return null;
