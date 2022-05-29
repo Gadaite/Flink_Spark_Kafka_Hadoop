@@ -287,7 +287,7 @@ public class AutoCreateMysqlBean {
         PreparedStatement pStemt = null;
         Class.forName(DRIVER);
         con = DriverManager.getConnection(URL, NAME, PASS);
-        System.out.println("connect database success..."+con);
+        System.out.println("connect database success/"+con.getCatalog());
         //获取数据库的元数据
         DatabaseMetaData db = con.getMetaData();
         //是否有指定生成表，有指定则直接用指定表，没有则全表生成
@@ -307,7 +307,6 @@ public class AutoCreateMysqlBean {
         for (int j = 0; j < tableNames.size(); j++) {
             tableName = tableNames.get(j);
             tableSql = SQL + tableName;
-            System.out.println(tableSql);
             pStemt = con.prepareStatement(tableSql);
             ResultSetMetaData rsmd = pStemt.getMetaData();
             ResultSet rsk = con.getMetaData().getPrimaryKeys(con.getCatalog().toLowerCase(), null, tableName);

@@ -3,7 +3,7 @@ package GadaiteJavaBeanFromDBS;
 /**
  * table name:  flights
  * author name: Gadaite
- * create time: 2022-05-29 11:47:05
+ * create time: 2022-05-29 11:53:24
  */ 
 public class Flights extends EntityHelper{
 
