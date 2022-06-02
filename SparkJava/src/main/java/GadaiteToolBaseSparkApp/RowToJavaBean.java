@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * made by Gadaite
- * 用于Spark的Row类型RDD,转换为T类型的JavaBean
+ * 用于Spark的Row类型RDD,转换为T类型的JavaBean的RDD
  * @param <T>
  */
 public class RowToJavaBean<T> implements Serializable, Function<Row,T> {

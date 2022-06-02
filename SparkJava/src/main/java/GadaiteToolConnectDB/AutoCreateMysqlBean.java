@@ -92,7 +92,7 @@ public class AutoCreateMysqlBean {
         // 实体部分
         String classExtends = "";
         if(needEntityHelper) {
-            classExtends=" extends EntityHelper";
+            classExtends=" extends EntityHelper implements Serializable ";
         }
         sb.append("public class " + under2camel(tableName, true) + classExtends + "{\r\n\r\n");
 
