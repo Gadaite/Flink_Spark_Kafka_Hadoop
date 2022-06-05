@@ -24,6 +24,7 @@ public class SortJavaBeanObject {
          */
         JavaRDD<Audi> audiJavaRDD = javaRDD.map(new RowToJavaBean<Audi>(new GetDDL().GetGadaiteDDL(dataset), Audi.class));
         List<Audi> collect = audiJavaRDD.collect();
+        System.out.println(collect.getClass().getName());
         /**
          * Collections.sort(collect);
          * 下面出现如下报错信息
@@ -43,7 +44,7 @@ public class SortJavaBeanObject {
         list.forEach(x-> System.out.println(x));
         System.out.println("_____________________________________________");
         /**
-         * Java8建议入下写法，更加方便
+         * Java8建议如下写法，更加方便
          */
         list.sort(Comparator.comparing(Audi::getYear).reversed());
         list.forEach(x -> System.out.println(x));

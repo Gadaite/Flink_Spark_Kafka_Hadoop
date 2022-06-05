@@ -4,6 +4,7 @@ package GadaiteToolConnectDB;
 import GadaiteToolBaseSparkApp.BaseSparkENV;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
 import java.io.FileReader;
@@ -68,5 +69,29 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
     @Override
     public String ExecuteFunction() throws Exception {
         return null;
+    }
+
+    /**
+     * made by Gadaite
+     * @param dataset 需要提交的Dataset
+     * @param tableName 表名，没有则创建
+     * @param SaveMode  保存数据的方式,字符串不区分大小写
+     * @throws Exception
+     */
+    public void PushToMySql(Dataset dataset,String tableName,String SaveMode) throws Exception {
+        Properties prop = new Properties();
+        prop.put("user", init().getProperty("username"));
+        prop.put("password", init().getProperty("pwd"));
+        if (SaveMode.equalsIgnoreCase("Append")){
+            dataset.write().mode(org.apache.spark.sql.SaveMode.Append).jdbc(init().getProperty("url"),tableName,prop);
+        }else if (SaveMode.equalsIgnoreCase("Overwrite")){
+            dataset.write().mode(org.apache.spark.sql.SaveMode.Overwrite).jdbc(init().getProperty("url"),tableName,prop);
+        }else if (SaveMode.equalsIgnoreCase("ErrorIfExists")){
+            dataset.write().mode(org.apache.spark.sql.SaveMode.ErrorIfExists).jdbc(init().getProperty("url"),tableName,prop);
+        }else if (SaveMode.equalsIgnoreCase("Ignore")){
+            dataset.write().mode(org.apache.spark.sql.SaveMode.Ignore).jdbc(init().getProperty("url"),tableName,prop);
+        }else {
+            System.out.println("Method is not exists!");
+        }
     }
 }
