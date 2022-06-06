@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * made by yangyi
+ * made by Gadaite
  */
 public class MysqlConnect implements Serializable {
     Properties properties = new Properties();
@@ -43,6 +43,13 @@ public class MysqlConnect implements Serializable {
         ResultSet resultSet = statement.executeQuery();
         return resultSet;
     }
+
+    /**
+     * made by Gadaite
+     * @param resultSet
+     * @return LIst结构的列名
+     * @throws SQLException
+     */
     public List GetResultSetColumnName(ResultSet resultSet) throws SQLException {
         ArrayList<String> columnName = new ArrayList<>();
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -52,6 +59,13 @@ public class MysqlConnect implements Serializable {
         }
         return columnName;
     }
+
+    /**
+     * made by Gadaite
+     * @param resultSet
+     * @return List结构的结果
+     * @throws SQLException
+     */
     public List<Map> GetREsultSetMapData(ResultSet resultSet) throws SQLException {
         List<Map> mapdata = new ArrayList<>();
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -64,5 +78,24 @@ public class MysqlConnect implements Serializable {
             mapdata.add(map);
         }
         return mapdata;
+    }
+
+    /**
+     * made by Gadaute
+     * @param sql 执行的SQL语句
+     * @throws Exception
+     */
+    public void ExecMysql(String sql) throws Exception {
+        Properties prop = init();
+        String url = prop.getProperty("url");
+        String driver = prop.getProperty("driver");
+        String user = prop.getProperty("username");
+        String password = prop.getProperty("pwd");
+        Class.forName(driver);
+        Connection connection = DriverManager.getConnection(url, user, password);
+        connection.setAutoCommit(false);
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(sql);
+        connection.commit();
     }
 }
