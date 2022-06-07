@@ -1,6 +1,7 @@
 package WorkAoutSpark.Main20220605;
 
 import GadaiteToolConnectDB.MysqlJdbcCon;
+import jodd.util.StringUtil;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
@@ -30,14 +31,14 @@ public class TransCsvTwoToDbeaver {
                 String s = v1.toString();
                 String substring = s.substring(s.indexOf("[") + 1, s.indexOf("]"));
                 String[] strings = substring.split(",");
-                boolean b1 = strings[0] != "" && strings[1] != "" && strings[2] != "" && strings[3] != "" && strings[4] != "";
+                boolean b1 = !strings[0].equals("") && !strings[1].equals("") && !strings[2].equals("") && !strings[3].equals("") && !strings[4].equals("");
                 boolean b2 = strings[0] != null && strings[1] != null && strings[2] != null && strings[3] != null && strings[4] != null;
                 if (b1 && b2){
                     Integer user = Integer.valueOf(String.valueOf(strings[0]));
                     String date = strings[1].replace("T", " ").replace("Z", "");
                     SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    Double lat = Double.valueOf(strings[2]);
-                    Double lon = Double.valueOf(strings[3]);
+                    Double lat = Double.valueOf(strings[2]).doubleValue();
+                    Double lon = Double.valueOf(strings[3]).doubleValue();
                     String location = String.valueOf(strings[4]);
                     Date date1 = sf.parse(date);
                     Timestamp timestamp = new Timestamp(date1.getTime());
@@ -68,7 +69,8 @@ public class TransCsvTwoToDbeaver {
         rdd.take(3).forEach(x -> System.out.println(x));
         Dataset<Row> dataFrame = spark.createDataFrame(rdd, StructType.fromDDL("`user` INT,`time` Timestamp,`latitude` DOUBLE,`longitude` DOUBLE,`location` STRING"));
         dataFrame.show(10);
-//        con.PushToMySql(dataFrame,"Brightkite_totalCheckins","append");
+        con.PushToMySql(dataFrame,"Brightkite_totalCheckins","append");
 
     }
+
 }
