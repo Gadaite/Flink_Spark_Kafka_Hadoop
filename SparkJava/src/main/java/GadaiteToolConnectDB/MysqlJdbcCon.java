@@ -82,6 +82,7 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
         Properties prop = new Properties();
         prop.put("user", init().getProperty("username"));
         prop.put("password", init().getProperty("pwd"));
+        prop.put("driver",init().getProperty("driver"));
         if (SaveMode.equalsIgnoreCase("Append")){
             dataset.write().mode(org.apache.spark.sql.SaveMode.Append).jdbc(init().getProperty("url"),tableName,prop);
         }else if (SaveMode.equalsIgnoreCase("Overwrite")){
