@@ -1,5 +1,6 @@
 package WorkAoutSpark.Main20220605;
 
+import GadaiteToolConnectDB.MysqlConnect;
 import GadaiteToolConnectDB.MysqlJdbcCon;
 import jodd.util.StringUtil;
 import org.apache.spark.api.java.JavaRDD;
@@ -42,7 +43,16 @@ public class TransCsvTwoToDbeaver {
         spark.sqlContext().udf().register("UDFF",new TransField(), DataTypes.StringType);
         Dataset<Row> sqlres = spark.sql("select user,UDFF(time) as time,latitude,longitude,location from data");
         sqlres.show(10);
-        con.PushToMySql(sqlres,"Brightkite_totalCheckins","overwrite");
+//        con.PushToMySql(sqlres,"Brightkite_totalCheckins","overwrite");
+        /**
+         * 执行表结构，更新Mysql数据类型
+         */
+        MysqlConnect connect = new MysqlConnect();
+        connect.ExecMysql("ALTER TABLE CETC10S.Brightkite_totalCheckins MODIFY COLUMN `user` int NULL");
+        connect.ExecMysql("ALTER TABLE CETC10S.Brightkite_totalCheckins MODIFY COLUMN `time` TIMESTAMP NULL");
+        connect.ExecMysql("ALTER TABLE CETC10S.Brightkite_totalCheckins MODIFY COLUMN latitude double NULL");
+        connect.ExecMysql("ALTER TABLE CETC10S.Brightkite_totalCheckins MODIFY COLUMN longitude double NULL");
+        connect.ExecMysql("ALTER TABLE CETC10S.Brightkite_totalCheckins MODIFY COLUMN location varchar(64) NULL");
 
 
     }
