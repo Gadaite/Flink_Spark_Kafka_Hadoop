@@ -9,8 +9,11 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import scala.Tuple2;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 public class HandleTable {
     public static void main(String[] args) throws Exception {
@@ -38,7 +41,9 @@ public class HandleTable {
         JavaRDD<BrightkiteTotalcheckins> hash = maprdd.map(new GetGeoHash(9));
         //  按照用户ID分组
         JavaPairRDD<Integer, Iterable<BrightkiteTotalcheckins>> pairRDD = hash.groupBy(new GroupFunction());
-        pairRDD.take(7).forEach(x -> System.out.println(x));
+        JavaRDD<Tuple2<Integer, HashMap<String, List<BrightkiteTotalcheckins>>>> sortDayRDD = pairRDD.map(new TrackFunction());
+        sortDayRDD.take(10).forEach(x -> System.out.println(x));
+
 
     }
 }
