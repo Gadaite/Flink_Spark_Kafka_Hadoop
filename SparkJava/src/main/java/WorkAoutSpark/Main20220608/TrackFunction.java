@@ -18,7 +18,7 @@ public class TrackFunction implements Function<Tuple2<Integer, Iterable<Brightki
         v1._2.forEach(data ->{
             int day = data.getTime().getDay();
             String dayStr = String.valueOf(day);
-            if (!hashMap.keySet().contains(dayStr)){
+            if (!hashMap.containsKey(dayStr)){
                 List<BrightkiteTotalcheckins> list = new ArrayList<>();
                 list.add(data);
                 hashMap.put(dayStr,list);
