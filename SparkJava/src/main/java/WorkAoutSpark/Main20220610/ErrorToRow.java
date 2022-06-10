@@ -3,7 +3,6 @@ package WorkAoutSpark.Main20220610;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
-import org.apache.spark.sql.types.StructType;
 
 public class ErrorToRow implements Function<Brightkite2008, Row> {
     @Override

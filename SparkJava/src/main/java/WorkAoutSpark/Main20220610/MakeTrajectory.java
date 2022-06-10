@@ -3,17 +3,13 @@ package WorkAoutSpark.Main20220610;
 import GadaiteToolBaseSparkApp.GetDDL;
 import GadaiteToolBaseSparkApp.RowToJavaBean;
 import GadaiteToolConnectDB.AutoCreateMysqlBean;
-import GadaiteToolConnectDB.MysqlConnect;
 import GadaiteToolConnectDB.MysqlJdbcCon;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructType;
-import org.locationtech.jts.geom.Geometry;
 import scala.Tuple2;
 
 import java.io.File;
