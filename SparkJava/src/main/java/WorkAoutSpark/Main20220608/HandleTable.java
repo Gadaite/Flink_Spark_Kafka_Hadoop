@@ -45,6 +45,5 @@ public class HandleTable {
         sortDayRDD.take(10).forEach(x -> System.out.println(x));
 
 
-
     }
 }
