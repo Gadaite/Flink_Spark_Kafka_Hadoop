@@ -1,11 +1,12 @@
 package GadaiteJavaBeanFromDBS;
 
+import java.io.Serializable;
 /**
  * table name:  flights
  * author name: Gadaite
- * create time: 2022-05-29 11:53:24
+ * create time: 2022-06-12 00:56:02
  */ 
-public class Flights extends EntityHelper{
+public class Flights extends EntityHelper implements Serializable {
 
 	private java.lang.Integer YEAR;
 	private java.lang.Integer MONTH;

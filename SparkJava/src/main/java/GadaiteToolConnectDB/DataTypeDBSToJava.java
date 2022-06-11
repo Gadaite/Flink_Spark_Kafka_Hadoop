@@ -6,10 +6,14 @@ import java.util.Map;
 /**
  * made by Gadaite
  * 用于SQL数据类型转换为Java类型
+ * 后续不断补充
  */
 public class DataTypeDBSToJava {
     public static Map<String ,String> map = new HashMap<>();
     static {
+        /**
+         * 下面包括但不限于mysql
+         */
         map.put("smallint", "java.lang.Integer");
         map.put("mediumint", "java.lang.Integer");
         map.put("integer", "java.lang.Integer");
@@ -39,5 +43,11 @@ public class DataTypeDBSToJava {
         map.put("enum", "java.lang.String");
         map.put("set", "java.lang.String");
         map.put("bit", "java.lang.Boolean");
+
+        /**
+         * 为PostgresSql新增的部分
+         */
+        map.put("int4", "java.lang.Integer");
+        map.put("geometry","java.lang.String");
     }
 }

@@ -32,7 +32,14 @@ public class BinaryToGeometry {
      * @return  org.geolatte.geom.Geometry
      */
     public Geometry GeolatteGeometry(String str){
-        String sss = str.substring(str.indexOf("[") + 1, str.indexOf("]"));
+        String sss = "";
+        if (str.contains("[") && str.contains("]")){
+            sss = str.substring(str.indexOf("[") + 1, str.indexOf("]"));
+        }else if (str.contains("(") && str.contains(")")){
+            sss = str.substring(str.indexOf("(") + 1, str.indexOf(")"));
+        }else {
+            sss = str;
+        }
         Geometry<?> geometry = Wkb.fromWkb(ByteBuffer.from(sss));
         return geometry;
     }

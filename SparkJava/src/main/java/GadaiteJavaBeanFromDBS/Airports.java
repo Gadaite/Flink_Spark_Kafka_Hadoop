@@ -1,11 +1,12 @@
 package GadaiteJavaBeanFromDBS;
 
+import java.io.Serializable;
 /**
  * table name:  airports
  * author name: Gadaite
- * create time: 2022-05-29 11:53:24
+ * create time: 2022-06-12 00:56:02
  */ 
-public class Airports extends EntityHelper{
+public class Airports extends EntityHelper implements Serializable {
 
 	private java.lang.String IATA_CODE;
 	private java.lang.String AIRPORT;

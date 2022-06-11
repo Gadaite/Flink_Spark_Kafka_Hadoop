@@ -1,9 +1,8 @@
-package WorkAoutSpark.Main20220611;
+package WorkAoutSpark.Main20220612;
 
 import GadaiteToolConnectDB.PostgresqlConnect;
 import GadaiteToolConnectDB.PostgresqlJdbcCon;
 import GadaiteToolGeo.BinaryToGeometry;
-import GadaiteToolGeo.StrLineSTRING;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.Dataset;
@@ -16,13 +15,17 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
-public class PSqlTest {
+/**
+ * 测试PostgresqlJdbcCon方式读取PSql
+ * 完成
+ */
+public class PSqlJdbcReadTest {
     public static void main(String[] args) throws Exception {
 
         /**
          * 测试读取
          */
-        //todo : 数据读取和dbeaver上看到的不同
+        //todo : 数据读取和dbeaver上看到的不同，为二进制数据(已解决如下)
         PostgresqlJdbcCon pcon = new PostgresqlJdbcCon();
         SparkSession spark = pcon.getSparkSesssion("test", "ERROR");
         Dataset<Row> dataset = pcon.GetDataSetByProperties(spark, "select * from objecttrajactory limit 10");
@@ -37,14 +40,6 @@ public class PSqlTest {
                 return lineString;
             }
         });
-        map.take(1).forEach(x -> System.out.println(x));
-
-        /**
-         * 测试上传
-         */
-        PostgresqlConnect connect = new PostgresqlConnect();
-        ResultSet resultSet = connect.PSqlQuery("select * from objecttrajactory limit 10");
-        System.out.println(resultSet.getMetaData().getColumnTypeName(2));// 输出：geometry
-        List<Map> maps = connect.GetREsultSetMapData(resultSet);
+        map.take(10).forEach(x -> System.out.println(x));
     }
 }

@@ -1,11 +1,12 @@
 package GadaiteJavaBeanFromDBS;
 
+import java.io.Serializable;
 /**
  * table name:  audi
  * author name: Gadaite
- * create time: 2022-05-29 11:53:24
+ * create time: 2022-06-12 00:55:57
  */ 
-public class Audi extends EntityHelper{
+public class Audi extends EntityHelper implements Serializable {
 
 	private java.lang.String model;
 	private java.lang.Integer year;

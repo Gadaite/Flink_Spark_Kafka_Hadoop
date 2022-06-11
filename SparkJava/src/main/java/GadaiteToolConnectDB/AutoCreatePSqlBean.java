@@ -1,23 +1,12 @@
 package GadaiteToolConnectDB;
 
-import org.mortbay.util.UrlEncoded;
-
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
-/**
- * made by Gadaite
- * reference from csdn ----  http://t.csdn.cn/MPZ20
- * 使用Java自动创建Mysql的JavaBean类
- */
-public class AutoCreateMysqlBean {
+public class AutoCreatePSqlBean {
     //表名
     private String tableName;
     //列名数组
@@ -42,7 +31,7 @@ public class AutoCreateMysqlBean {
     // 数据库配置信息
     private Properties properties = new Properties();
     public Properties init() throws Exception{
-        FileReader fileReader = new FileReader("F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\resources\\mysql.properties");
+        FileReader fileReader = new FileReader("F:\\CodeG50\\BiGData\\SparkJava\\src\\main\\resources\\postgresql.properties");
         properties.load(fileReader);
         fileReader.close();
         return properties;
@@ -70,7 +59,7 @@ public class AutoCreateMysqlBean {
     //主键
     private static String pk;
 
-    public AutoCreateMysqlBean() throws Exception {
+    public AutoCreatePSqlBean() throws Exception {
         init();
         URL = properties.getProperty("url");
         NAME = properties.getProperty("username");
@@ -249,13 +238,12 @@ public class AutoCreateMysqlBean {
     }
 
     /**
-     * @return
-     * @description 查找sql字段类型所对应的Java类型
+     * @return  查找sql字段类型所对应的Java类型
+     * @description PSql数据类型转JavaBean类型,因为Spark通过JavaRDD创建Dataset,使用Java反射只能用JavaBean的类型
      */
     private String sqlType2JavaType(String sqlType) {
         DataTypeDBSToJava dataTypeDBSToJava = new DataTypeDBSToJava();
         Map<String, String> map = dataTypeDBSToJava.map;
-        Set<Map.Entry<String, String>> entries = map.entrySet();
         for (Map.Entry<String, String> entry : map.entrySet()){
             if (sqlType.equalsIgnoreCase(entry.getKey())){
                 return entry.getValue();
@@ -277,7 +265,7 @@ public class AutoCreateMysqlBean {
      * 生成EntityHelper
      */
     private void EntityHelper() {
-        String dirName = AutoCreateMysqlBean.pkgDirName();
+        String dirName = AutoCreatePSqlBean.pkgDirName();
         String javaPath = dirName + "/EntityHelper.java";
         try {
             StringBuffer sb = new StringBuffer();
@@ -348,15 +336,43 @@ public class AutoCreateMysqlBean {
                     needSql = true;
                 colSizes[i] = rsmd.getColumnDisplaySize(i + 1);
             }
+
+
             //获取字段注释
-            ResultSet rsComment = pStemt.executeQuery("show full columns from " + tableName);
+            /**
+             * PostgresSql的语法极其复杂
+             * 表的结构描述信息对应如下
+             * executeQuery()应该使用不带参数的方式
+             * 否则抛出异常:org.postgresql.util.PSQLException: 在 PreparedStatement 上不能使用获取查询字符的查询方法。
+             * 仔细对比该处与AutoCreateMysqlBean.java的差异
+             */
+            StringBuffer sql = new StringBuffer();
+            sql.append("select A.attnum,");
+            sql.append("( SELECT description FROM pg_catalog.pg_description WHERE objoid = A.attrelid AND objsubid = A.attnum ) AS comment,");
+            sql.append("A.attname AS field,");
+            sql.append("( select typname from pg_type where oid = A.atttypid) AS type,");
+            sql.append("A.atttypmod AS data_type ");
+            sql.append("FROM pg_catalog.pg_attribute A ");
+            sql.append("WHERE 1 = 1 ");
+            sql.append("AND A.attrelid = ( SELECT oid FROM pg_class WHERE relname = '");
+            sql.append(tableName);
+            sql.append("') ");
+            sql.append("AND A.attnum > 0 ");
+            sql.append("AND NOT A.attisdropped ");
+            sql.append("ORDER by A.attnum ; ");
+            PreparedStatement preparedStatement = con.prepareStatement(sql.toString());
+            ResultSet rsComment = preparedStatement.executeQuery();
             while (rsComment.next()) {
-                colNamesComment.put(rsComment.getString("Field"), rsComment.getString("Comment"));
+                colNamesComment.put(rsComment.getString("field"), rsComment.getString("comment"));
             }
+
+
+
+
             //解析生成实体java文件的所有内容
             String content = parse();
             //输出生成文件
-            String dirName = AutoCreateMysqlBean.pkgDirName();
+            String dirName = AutoCreatePSqlBean.pkgDirName();
             String javaPath = dirName + "/" + under2camel(tableName, true) + ".java";
             FileWriter fw = new FileWriter(javaPath);
             pw = new PrintWriter(fw);
@@ -374,8 +390,8 @@ public class AutoCreateMysqlBean {
      * @param args
      */
 //    public static void main(String[] args) throws Exception {
-//        AutoCreateMysqlBean instance = new AutoCreateMysqlBean();
-//        String[] tablesname = {"audi","airlines","airports","flights"};
+//        AutoCreatePSqlBean instance = new AutoCreatePSqlBean();
+//        String[] tablesname = {"objecttrajactory"};
 //        instance.generateTables = tablesname;
 //        try {
 //            instance.generate();
@@ -385,4 +401,3 @@ public class AutoCreateMysqlBean {
 //        }
 //    }
 }
-

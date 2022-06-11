@@ -82,7 +82,7 @@ public class PostgresqlConnect implements Serializable {
      * @param sql 执行的SQL语句
      * @throws Exception
      */
-    public void ExecMysql(String sql) throws Exception {
+    public void ExecPSql(String sql) throws Exception {
         Properties prop = init();
         String url = prop.getProperty("url");
         String driver = prop.getProperty("driver");
