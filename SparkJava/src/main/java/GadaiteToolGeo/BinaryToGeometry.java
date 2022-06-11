@@ -3,7 +3,6 @@ package GadaiteToolGeo;
 import org.geolatte.geom.ByteBuffer;
 import org.geolatte.geom.Geometry;
 import org.geolatte.geom.codec.Wkb;
-import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
 
 /**
@@ -46,7 +45,6 @@ public class BinaryToGeometry {
     public LineString JTSLineString(String str){
         Geometry geometryA = GeolatteGeometry(str);
         String s = geometryA.toString();
-        GeometryFactory geometryFactory = new GeometryFactory();
         LineString lineString = new StrLineSTRING().FormatToLineString(s);
         return lineString;
     }
