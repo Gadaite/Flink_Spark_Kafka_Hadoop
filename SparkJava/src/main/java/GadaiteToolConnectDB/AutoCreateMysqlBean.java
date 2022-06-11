@@ -67,6 +67,7 @@ public class AutoCreateMysqlBean {
         StringBuffer sb = new StringBuffer();
         sb.append("package " + packageOutPath + ";\r\n");
         sb.append("\r\n");
+        sb.append("import java.io.Serializable;\r\n");
         // 判断是否导入工具包
         if (needUtil) {
             sb.append("import java.util.Date;\r\n");
