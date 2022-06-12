@@ -60,10 +60,10 @@ public class PostgresqlConnect implements Serializable {
     /**
      * made by Gadaite
      * @param resultSet
-     * @return List结构的结果
+     * @return List结构的结果 list[Object<Map<colname,value>,...>,...]
      * @throws SQLException
      */
-    public List<Map> GetREsultSetMapData(ResultSet resultSet) throws SQLException {
+    public List<Map> GetResultSetMapData(ResultSet resultSet) throws SQLException {
         List<Map> mapdata = new ArrayList<>();
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columnCount = metaData.getColumnCount();
@@ -94,5 +94,23 @@ public class PostgresqlConnect implements Serializable {
         Statement statement = connection.createStatement();
         statement.executeUpdate(sql);
         connection.commit();
+    }
+
+    /**
+     * 获取Psql数据库中的字段名以及对应的数据类型
+     * @param resultSet 获取到的结果
+     * @return Map<字段名,数据类型>
+     * @throws Exception
+     */
+    public Map<String,String> GetColumnNameMapType(ResultSet resultSet) throws Exception{
+        Map<String, String> map = new HashMap<>();
+        List ColumnList = GetResultSetColumnName(resultSet);
+        while (resultSet.next()){
+            for (int i=1;i<=ColumnList.size();i++){
+                map.put(String.valueOf(ColumnList.get(i-1)),resultSet.getMetaData().getColumnTypeName(i));
+            }
+            break;
+        }
+        return map;
     }
 }

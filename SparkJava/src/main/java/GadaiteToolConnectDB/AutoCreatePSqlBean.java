@@ -238,10 +238,11 @@ public class AutoCreatePSqlBean {
     }
 
     /**
+     * 放开状态为Public,方便重写更换HashMap集使用
      * @return  查找sql字段类型所对应的Java类型
      * @description PSql数据类型转JavaBean类型,因为Spark通过JavaRDD创建Dataset,使用Java反射只能用JavaBean的类型
      */
-    private String sqlType2JavaType(String sqlType) {
+    public String sqlType2JavaType(String sqlType) {
         DataTypeDBSToJava dataTypeDBSToJava = new DataTypeDBSToJava();
         Map<String, String> map = dataTypeDBSToJava.map;
         for (Map.Entry<String, String> entry : map.entrySet()){

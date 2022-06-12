@@ -79,6 +79,7 @@ public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
      */
     public void PushToMySql(Dataset dataset,String tableName,String SaveMode) throws Exception {
         Properties prop = new Properties();
+
         prop.put("user", init().getProperty("username"));
         prop.put("password", init().getProperty("pwd"));
         prop.put("driver",init().getProperty("driver"));
