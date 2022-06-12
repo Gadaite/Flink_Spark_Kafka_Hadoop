@@ -101,7 +101,7 @@ public class ChinaCityBoundary {
         /**
          * 执行数据写入并更改表结构
          */
-        pcon.PushToPSql(dataset,"ChinaCityBoundary","overwrite");
+//        pcon.PushToPSql(dataset,"ChinaCityBoundary","overwrite");
         PostgresqlConnect postgresqlConnect = new PostgresqlConnect();
         postgresqlConnect.ExecPSql("ALTER TABLE public.ChinaCityBoundary ALTER COLUMN region TYPE geometry USING region::geometry;");
         postgresqlConnect.ExecPSql("ALTER TABLE public.ChinaCityBoundary ALTER COLUMN center TYPE geometry USING center::geometry;");
