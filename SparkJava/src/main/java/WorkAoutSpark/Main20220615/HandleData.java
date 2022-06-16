@@ -12,6 +12,7 @@ import org.apache.spark.api.java.function.Function;
 import org.apache.spark.rdd.RDD;
 import org.apache.spark.sql.*;
 import scala.Tuple2;
+import org.apache.spark.sql.types.UDTRegistration;
 
 import java.io.File;
 
@@ -37,6 +38,7 @@ public class HandleData {
          */
         PostgresqlJdbcCon pcon = new PostgresqlJdbcCon();
         SparkSession spark = pcon.getSparkSesssion("HandleDate", "ERROR");
+        spark.conf().set("spark.serializer","org.apache.spark.serializer.KryoSerializer");
         Dataset<Row> dataset = pcon.GetDataSetByProperties(spark, "select * from trajectlonlat " +
                 "where datetime >= '2009-01-01 00:00:00' and datetime <= '2009-01-10 00:00:00'");
         dataset.show();
@@ -57,7 +59,8 @@ public class HandleData {
          * 创建DataSet
          */
         RDD<TrajectoryByDayModel> rdd = ResRdd.rdd();
-        Dataset<TrajectoryByDayModel> resdataset = spark.createDataset(ResRdd.rdd(), Encoders.bean(TrajectoryByDayModel.class));
+        Dataset<TrajectoryByDayModel> resdataset = spark.createDataset(ResRdd.rdd(), Encoders.kryo(TrajectoryByDayModel.class));
+
         resdataset.show(20);
     }
 }

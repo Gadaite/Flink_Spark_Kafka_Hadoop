@@ -147,7 +147,6 @@
     <orderEntry type="library" name="Maven: org.apache.spark:spark-launcher_2.11:2.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-kvstore_2.11:2.4.5" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.7" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-network-common_2.11:2.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-network-shuffle_2.11:2.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-unsafe_2.11:2.4.5" level="project" />
@@ -243,8 +242,12 @@
     <orderEntry type="library" name="Maven: org.typelevel:machinist_2.11:0.6.1" level="project" />
     <orderEntry type="library" name="Maven: com.chuusai:shapeless_2.11:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.typelevel:macro-compat_2.11:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.sedona:sedona-core-2.4_2.11:1.0.0-incubating" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.sedona:sedona-sql-2.4_2.11:1.0.0-incubating" level="project" />
+    <orderEntry type="library" name="Maven: org.wololo:jts2geojson:0.14.3" level="project" />
+    <orderEntry type="library" name="Maven: org.locationtech.jts:jts-core:1.16.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.0.pr1" level="project" />
     <orderEntry type="library" name="Maven: org.geolatte:geolatte-geom:1.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.locationtech.jts:jts-core:1.18.2" level="project" />
     <orderEntry type="library" name="Maven: org.geolatte:geolatte-geojson:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: com.vividsolutions:jts:1.13" level="project" />
     <orderEntry type="library" name="Maven: org.locationtech.spatial4j:spatial4j:0.7" level="project" />
