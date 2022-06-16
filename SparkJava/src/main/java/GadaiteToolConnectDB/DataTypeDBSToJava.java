@@ -49,5 +49,6 @@ public class DataTypeDBSToJava {
          */
         map.put("int4", "java.lang.Integer");
         map.put("geometry","java.lang.String");
+        map.put("float8","java.lang.Double");
     }
 }
