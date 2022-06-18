@@ -1,31 +1,26 @@
 package WorkAoutSpark.Main20220616;
 
 import GadaiteToolConnectDB.PostgresqlJdbcCon;
-import org.apache.sedona.core.serde.SedonaKryoRegistrator;
 import org.apache.sedona.sql.utils.SedonaSQLRegistrator;
 import org.apache.spark.sql.AnalysisException;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.api.java.UDF2;
-import org.apache.spark.sql.catalog.Function;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Point;
 
 /**
- * 目的使用spark直接使用ST_相关的GIS函数
- * 任务艰巨，难以实现
- * 有时间再继续
+ * 待完成目标：
+ * 将函数的值注册到外部直接使用UDF函数
  */
 public class TestGis {
     public static void main(String[] args) throws AnalysisException {
-//        PostgresqlJdbcCon pcon = new PostgresqlJdbcCon();
-//        SparkSession spark = pcon.getSparkSesssion("Gis", "ERROR");
-//        SedonaSQLRegistrator.registerAll(spark);
-//        SedonaKryoRegistrator sedonaKryoRegistrator = new SedonaKryoRegistrator();
-//        sedonaKryoRegistrator.registerClasses(spark);
-//        Function ST_Point = spark.catalog().getFunction("ST_Point");
-//        System.out.println(ST_Point.getClass().getName());
-//        ST_Point.name()new Coordinate(1.2,1.6).
-
+        PostgresqlJdbcCon pcon = new PostgresqlJdbcCon();
+        SparkSession spark = pcon.getSparkSesssion("Gis", "ERROR");
+        spark.conf().set("spark.serializer","org.apache.spark.serializer.KryoSerializer");
+        spark.conf().set("spark.kryo.registrator","org.apache.sedona.core.serde.SedonaKryoRegistrator");
+        SedonaSQLRegistrator.registerAll(spark);
+        Dataset<Row> dataset = spark.sql("select ST_point(1.2,1.3)");
+        dataset.show();
+        dataset.printSchema();
 
     }
 }

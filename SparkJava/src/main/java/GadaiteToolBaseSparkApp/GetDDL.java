@@ -20,7 +20,6 @@ public class GetDDL {
     }
     public String GetDefaultDDL(Dataset dataset){
         String ddl = dataset.schema().toDDL();
-        System.out.println(ddl);
         return ddl;
     }
     public String GetGadaiteDDL(Dataset dataset){
