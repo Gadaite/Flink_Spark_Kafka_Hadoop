@@ -57,7 +57,6 @@ public class JTSTest {
                 "st_geomfromwkb(centroid) as centroid , childrenNum, st_geomfromwkb(region) as region ," +
                 "level, name, parentCenter, subFeatureIndex from datasource limit 5");
         dataset.show();
-        //  Exception in thread "main" java.lang.IllegalArgumentException: Can't get JDBC type for array<tinyint>
 //        pcon.PushToPSql(dataset,"20220618test","overwrite");
 
 
