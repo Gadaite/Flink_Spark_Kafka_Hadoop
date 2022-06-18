@@ -368,7 +368,8 @@
   </property>
   <property>
     <name>hive.metastore.uris</name>
-    <value/>
+<!--    <value/>原始的设置，更改于20220618Gadaite-->
+    <value></value>
     <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.</description>
   </property>
   <property>

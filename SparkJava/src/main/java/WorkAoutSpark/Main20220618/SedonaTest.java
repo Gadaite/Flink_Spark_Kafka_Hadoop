@@ -2,6 +2,8 @@ package WorkAoutSpark.Main20220618;
 
 import GadaiteToolBaseSparkApp.GetDDL;
 import GadaiteToolConnectDB.PostgresqlJdbcCon;
+import com.esotericsoftware.kryo.KryoSerializable;
+import org.apache.sedona.sql.utils.GeometrySerializer;
 import org.apache.sedona.sql.utils.SedonaSQLRegistrator;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
