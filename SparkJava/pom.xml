@@ -16,54 +16,23 @@
         <spark.version>2.4.5</spark.version>
         <kafka.version>0.8</kafka.version>
         <kotlin.version>1.3.72</kotlin.version>
-        <geotools.version>25-RC</geotools.version>
+        <geotools.version>20.5</geotools.version>
     </properties>
 
     <repositories>
         <repository>
-            <id>locationtech-releases</id>
-            <url>https://repo.locationtech.org/content/groups/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>scala-tools.org</id>
-            <name>Scala-Tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-releases</url>
-        </repository>
-        <repository>
             <id>osgeo</id>
-            <name>Open Source Geospatial Foundation Repository</name>
-            <url>http://download.osgeo.org/webdav/geotools/</url>
-        </repository>
-        <repository>
-            <id>osgeo</id>
-            <name>Open Source Geospatial Foundation Repository</name>
-            <url>http://download.osgeo.org/webdav/geotools/</url>
-        </repository>
-        <repository> <!--Add the snapshot repository here-->
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>opengeo</id>
-            <name>OpenGeo Maven Repository</name>
-            <url>http://repo.opengeo.org</url>
-        </repository>
-        <repository>
-            <id>alfresco</id>
-            <name>Activiti Releases</name>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>javadbf</id>
-            <name>javadbf</name>
-            <url>https://mvnrepository.com/artifact/com.linuxense/javadbf</url>
+            <name>OSGeo Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
             <snapshots><enabled>false</enabled></snapshots>
             <releases><enabled>true</enabled></releases>
+        </repository>
+        <repository>
+            <id>osgeo-snapshot</id>
+            <name>OSGeo Snapshot Repository</name>
+            <url>https://repo.osgeo.org/repository/snapshot/</url>
+            <snapshots><enabled>true</enabled></snapshots>
+            <releases><enabled>false</enabled></releases>
         </repository>
     </repositories>
 
@@ -220,6 +189,57 @@
             <version>1.6.0</version>
         </dependency>
         <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-api</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geojson</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geometry</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.geotools</groupId>-->
+<!--            <artifactId>gt-jts-wrapper</artifactId>-->
+<!--            <version>${geotools.version}</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-opengis</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-data</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.vividsolutions</groupId>
             <artifactId>jts</artifactId>
             <version>1.13</version>
@@ -232,7 +252,7 @@
         <dependency>
             <groupId>org.locationtech.jts</groupId>
             <artifactId>jts-core</artifactId>
-            <version>1.15.0</version>
+            <version>1.16.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>xerces</groupId>

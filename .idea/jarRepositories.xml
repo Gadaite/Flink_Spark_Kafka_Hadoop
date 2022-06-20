@@ -7,6 +7,11 @@
       <option name="url" value="https://repo.locationtech.org/content/groups/releases" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="osgeo" />
+      <option name="name" value="OSGeo Release Repository" />
+      <option name="url" value="https://repo.osgeo.org/repository/snapshot/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
@@ -17,9 +22,39 @@
       <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="osgeo" />
+      <option name="name" value="Open Source Geospatial Foundation Repository" />
+      <option name="url" value="http://repo.opengeo.org/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="javadbf" />
+      <option name="name" value="javadbf" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="osgeo-snapshot" />
+      <option name="name" value="OSGeo Snapshot Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="scala-tools.org" />
+      <option name="name" value="Scala-Tools Maven2 Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="opengeo" />
+      <option name="name" value="OpenGeo Maven Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="alfresco" />
+      <option name="name" value="Activiti Releases" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="alfresco" />
@@ -65,6 +100,11 @@
       <option name="id" value="osgeo" />
       <option name="name" value="OSGeo Release Repository" />
       <option name="url" value="https://repo.osgeo.org/repository/release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="locationtech-releases" />
+      <option name="name" value="locationtech-releases" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
     </remote-repository>
   </component>
 </project>
