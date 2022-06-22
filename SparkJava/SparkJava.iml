@@ -273,6 +273,8 @@
     <orderEntry type="library" name="Maven: org.geotools:gt-geojson:20.5" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-geometry:20.5" level="project" />
+    <orderEntry type="library" name="Maven: org.locationtech.geomesa:geomesa-spark-jts_2.11:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.locationtech.jts.io:jts-io-common:1.16.0" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-main:20.5" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-epsg-hsql:20.5" level="project" />
