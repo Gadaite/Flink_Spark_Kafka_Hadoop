@@ -8,9 +8,11 @@ import GadaiteToolConnectDB.PostgresqlJdbcCon;
 import org.apache.sedona.sql.utils.SedonaSQLRegistrator;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.rdd.RDD;
 import org.apache.spark.sql.*;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * RDD的Map加上SQL语句执行写入数据到PostgresSql
@@ -37,6 +39,8 @@ public class TransGeoType {
         dataset.printSchema();
         JavaRDD<Objecttrajactory> javaRDD = dataset.toJavaRDD().
                 map(new RowToJavaBean<Objecttrajactory>(new GetDDL().GetGadaiteDDL(dataset), Objecttrajactory.class));
+        List<Objecttrajactory> collect = javaRDD.collect();
+        collect.forEach(x -> System.out.println(x));
         Dataset<Objecttrajactory> dataset1 = spark.createDataset(javaRDD.rdd(), Encoders.bean(Objecttrajactory.class));
         dataset1.registerTempTable("view1");
         Dataset<Row> geometryDataSet = spark.sql("select lastappeared_id,ST_GeomFromWKB(`gps_line`) as gps_line from view1");
@@ -57,7 +61,7 @@ public class TransGeoType {
             @Override
             public Void call(Objecttrajactory v1) throws Exception {
                 String sql = "INSERT INTO public.test20220622 (lastappeared_id , gps_line) " +
-                        "VALUES(" + v1.getLastappeared_id() + ", GEOMETRY('" + v1.getGps_line() + "'));";
+                        "VALUES(int4('" + v1.getLastappeared_id() + "'), GEOMETRY('" + v1.getGps_line() + "'));";
                 System.out.println(sql);
                 pcon.ExecPSql(sql);
                 return null;

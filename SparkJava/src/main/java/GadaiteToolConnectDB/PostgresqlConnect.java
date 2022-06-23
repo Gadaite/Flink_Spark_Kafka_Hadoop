@@ -7,6 +7,17 @@ import java.util.*;
 
 public class PostgresqlConnect implements Serializable {
     Properties properties = new Properties();
+    public static String GetTableInfo = "select A.attnum," +
+            "( SELECT description FROM pg_catalog.pg_description WHERE objoid = A.attrelid AND objsubid = A.attnum ) AS comment," +
+            "A.attname AS field," +
+            "( select typname from pg_type where oid = A.atttypid) AS type," +
+            "A.atttypmod AS data_type " +
+            "FROM pg_catalog.pg_attribute A " +
+            "WHERE 1 = 1 " +
+            "AND A.attrelid = ( SELECT oid FROM pg_class WHERE relname = 'TABLENAME') " +
+            "AND A.attnum > 0 " +
+            "AND NOT A.attisdropped " +
+            "ORDER by A.attnum  ";
     public PostgresqlConnect() {
     }
     /**
@@ -98,7 +109,7 @@ public class PostgresqlConnect implements Serializable {
 
     /**
      * 获取Psql数据库中的字段名以及对应的数据类型
-     * @param resultSet 获取到的结果
+     * @param resultSet 获取到的结果,必须保证有数据存在
      * @return Map<字段名,数据类型>
      * @throws Exception
      */
@@ -110,6 +121,24 @@ public class PostgresqlConnect implements Serializable {
                 map.put(String.valueOf(ColumnList.get(i-1)),resultSet.getMetaData().getColumnTypeName(i));
             }
             break;
+        }
+        return map;
+    }
+
+    /**
+     * 从表名获取Psql数据库中的字段名以及对应的数据类型
+     * @param TableName 表名
+     * @return  Map<字段名,数据类型>
+     * @throws Exception
+     */
+    public Map<String,String> GetColumnNameMapType(String TableName) throws Exception{
+        Map<String, String> map = new HashMap<>();
+        ResultSet resultSet = PSqlQuery(GetTableInfo.replace("TABLENAME",TableName));
+        List<Map> mapList = GetResultSetMapData(resultSet);
+        for (Map oneMap : mapList){
+            String field = oneMap.get("field").toString();
+            String type = oneMap.get("type").toString();
+            map.put(field,type);
         }
         return map;
     }
