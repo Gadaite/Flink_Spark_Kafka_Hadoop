@@ -5,14 +5,17 @@ import GadaiteToolBaseSparkApp.RowToJavaBean;
 import GadaiteToolConnectDB.PostgresqlJdbcCon;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.*;
+import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
+import org.apache.spark.sql.types.DataTypes;
+import org.apache.spark.sql.types.StructType;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.io.WKBReader;
 import org.locationtech.jts.io.WKBWriter;
+import scala.Array;
 import scala.Tuple2;
+
 
 /**
  * 16进制geometry数据与geometry的相互转换
@@ -56,5 +59,16 @@ public class MakeSql {
             }
         });
         trans_transFromGeometry_ToGeometry.take(5).forEach(x -> System.out.println(x));
+        JavaRDD<Row> insertRDD = transFromGeometry.map(new Function<Tuple2<Integer, String>, Row>() {
+            @Override
+            public Row call(Tuple2<Integer, String> v1) throws Exception {
+                Row row = RowFactory.create(v1._1, v1._2);
+                StructType schema = row.schema().add("lastappeared_id", DataTypes.IntegerType).add("gps_line", DataTypes.StringType);
+//                new GenericRowWithSchema(,schema);
+                return row;
+            }
+        });
+        insertRDD.foreach(x -> System.out.println(x));
+
     }
 }

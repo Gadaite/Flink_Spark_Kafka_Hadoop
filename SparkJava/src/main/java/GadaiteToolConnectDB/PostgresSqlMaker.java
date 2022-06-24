@@ -1,14 +1,18 @@
 package GadaiteToolConnectDB;
 
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.sql.Row;
 
+import java.beans.beancontext.BeanContext;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.StringJoiner;
 
-public class PostgresSqlMaker implements Serializable {
+public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
     private PostgresqlConnect PSqlConnect = new PostgresqlConnect();
+
+    private String TableName;
 
     public PostgresSqlMaker(PostgresqlConnect PSqlConnect) {
         this.PSqlConnect = PSqlConnect;
@@ -45,19 +49,30 @@ public class PostgresSqlMaker implements Serializable {
             buffer.append(joinerField.toString());
             buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
             String sqlOfInsert = buffer.toString();
-//            System.out.println(sqlOfInsert);
             PSqlConnect.ExecPSql(sqlOfInsert);
         });
     }
-//  todo:直接创建表并提交到PostgresSql并保证同一类型，且能够支持geometry类型
-//    public void ExecCreate(JavaRDD<Row> javaRDD, String newTableName){
-//        javaRDD.foreach(x ->{
-//            int fieldCount = x.length();
-//            for (int i=0;i<fieldCount;i++){
-//                String simpleName = x.get(i).getClass().getSimpleName();
-//                System.out.println(simpleName);
-//            }
-//        });
-//    }
-
+    /**
+     * made by Gadaite
+     * 使用Map算子实现并行写入到PostgresSql数据库
+     * @param row JavaRDD<Row>
+     * @throws Exception
+     */
+    @Override
+    public void call(Row row) throws Exception {
+        Map<String, String> nameMapType = PSqlConnect.GetColumnNameMapType(TableName);
+        StringBuffer buffer = new StringBuffer();
+        StringJoiner joinerField = new StringJoiner(" , ");
+        StringJoiner joinerValue = new StringJoiner(" , ");
+        buffer.append("INSERT INTO public.").append(TableName).append(" (");
+        for (Map.Entry<String, String> entry : nameMapType.entrySet()){
+            joinerField.add(entry.getKey());
+            joinerValue.add(entry.getValue() + "('" + (row.get(row.fieldIndex(entry.getKey())).toString()) + "')");
+        }
+        buffer.append(joinerField.toString());
+        buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
+        String sqlOfInsert = buffer.toString();
+//            System.out.println(sqlOfInsert);
+        PSqlConnect.ExecPSql(sqlOfInsert);
+    }
 }
