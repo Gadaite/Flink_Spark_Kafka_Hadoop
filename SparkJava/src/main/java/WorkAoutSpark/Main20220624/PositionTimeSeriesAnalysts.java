@@ -3,6 +3,7 @@ package WorkAoutSpark.Main20220624;
 import GadaiteToolBaseSparkApp.GetDDL;
 import GadaiteToolBaseSparkApp.RowToJavaBean;
 import GadaiteToolConnectDB.AutoCreatePSqlBean;
+import GadaiteToolConnectDB.PostgresqlConnect;
 import GadaiteToolConnectDB.PostgresqlJdbcCon;
 import com.google.inject.internal.cglib.core.$LocalVariablesSorter;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -71,10 +72,15 @@ public class PositionTimeSeriesAnalysts {
         JavaRDD<SummaryByDayModel> summaryByDayModelJavaRDD = GroupByDayRDD.map(new SummaryByDayFunction());
         Dataset<SummaryByDayModel> summaryByDayDataSet = spark.createDataset(summaryByDayModelJavaRDD.rdd(),
                 Encoders.bean(SummaryByDayModel.class));
+        pcon.PushToPSql(summaryByDayDataSet,"trajectlonlatbyday","Overwrite");
         /**
+         * pcon.PushToPSql(summaryByDayDataSet,"trajectlonlatbyday","Overwrite");
          * 数据入库报错：
          * Caused by: org.geotools.referencing.operation.projection.ProjectionException: Latitude 40°10.0'N is too close to a pole.
+         * 由于GeoTools是将纬度放在前面生成坐标的和LocationTech相反需要进行转换
          */
-        pcon.PushToPSql(summaryByDayDataSet,"trajectlonlatbyday","Overwrite");
+        PostgresqlConnect connect = new PostgresqlConnect();
+        connect.ExecPSql("");
+
     }
 }

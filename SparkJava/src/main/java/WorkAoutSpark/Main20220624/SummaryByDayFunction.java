@@ -7,6 +7,7 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.io.WKTWriter;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import scala.Tuple2;
@@ -30,15 +31,18 @@ public class SummaryByDayFunction implements Function<Tuple2<String, Iterable<Po
         Timestamp startTime = list.get(0).getTimestamp();
         Timestamp endTime = list.get(list.size() - 1).getTimestamp();
         //  WGS84坐标
-        CoordinateReferenceSystem sourceCRS = CRS.decode("CRS:84");
+        CoordinateReferenceSystem sourceCRS = CRS.decode("CRS:84",true);
         //  Pseudo-Mercator(墨卡托投影)
-        CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:3857");
+        CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326",false);
         MathTransform mathTransform = CRS.findMathTransform(sourceCRS, targetCRS, false);
         GeometryFactory geometryFactory = new GeometryFactory();
         LineString lineString = geometryFactory.createLineString(coordinateList.toArray(new Coordinate[coordinateList.size()]));
         Geometry transformedLineString = JTS.transform(lineString, mathTransform);
         double length = transformedLineString.getLength();
         int pointCount = coordinateList.size();
-        return new SummaryByDayModel(startTime,endTime,pointCount,length);
+        Geometry geometryLineString = geometryFactory.createGeometry(lineString);
+        WKTWriter wktWriter = new WKTWriter();
+        String geoLineString = wktWriter.write(geometryLineString);
+        return new SummaryByDayModel(startTime,endTime,pointCount,length,geoLineString);
     }
 }

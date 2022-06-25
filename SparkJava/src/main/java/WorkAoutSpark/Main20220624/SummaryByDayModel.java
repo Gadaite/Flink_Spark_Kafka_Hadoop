@@ -8,12 +8,14 @@ public class SummaryByDayModel implements Serializable {
     private Timestamp endTime;
     private Integer pointCount;
     private Double distance;
+    private String linestring;
 
-    public SummaryByDayModel(Timestamp startTime, Timestamp endTime, Integer pointCount, Double distance) {
+    public SummaryByDayModel(Timestamp startTime, Timestamp endTime, Integer pointCount, Double distance, String linestring) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.pointCount = pointCount;
         this.distance = distance;
+        this.linestring = linestring; //    用字符串的WKT文本表示LineString
     }
     public SummaryByDayModel(){}
 
@@ -49,6 +51,14 @@ public class SummaryByDayModel implements Serializable {
         this.distance = distance;
     }
 
+    public String getLinestring() {
+        return linestring;
+    }
+
+    public void setLinestring(String linestring) {
+        this.linestring = linestring;
+    }
+
     @Override
     public String toString() {
         return "SummaryByDayModel{" +
@@ -56,6 +66,7 @@ public class SummaryByDayModel implements Serializable {
                 ", endTime=" + endTime +
                 ", pointCount=" + pointCount +
                 ", distance=" + distance +
+                ", linestring='" + linestring + '\'' +
                 '}';
     }
 }
