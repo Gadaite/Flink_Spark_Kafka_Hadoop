@@ -55,7 +55,7 @@ public class TaxiDataSummary implements Serializable {
         sqls.forEach(x ->{
             TaxiDataSummary taxiDataSummary = new TaxiDataSummary();
             try {
-//                taxiDataSummary.ExecFunction(x,spark,pcon);
+                taxiDataSummary.ExecFunction(x,spark,pcon);
             } catch (Exception e) {
                 e.printStackTrace();
             }
