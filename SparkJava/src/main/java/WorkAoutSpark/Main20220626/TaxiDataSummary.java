@@ -7,13 +7,17 @@ import GadaiteToolConnectDB.PostgresqlJdbcCon;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.thrift.transport.TSSLTransportFactory;
 import scala.Tuple2;
 
 import java.io.File;
+import java.util.Iterator;
 
 public class TaxiDataSummary {
     public static void main(String[] args) throws Exception {
@@ -39,10 +43,32 @@ public class TaxiDataSummary {
                 return new Tuple2<>(taxidata.getVehicleNum(),taxidata);
             }
         }).groupByKey();
-        JavaRDD<Tuple2<Iterable<TaxiDataOfCar>, Iterable<TaxiDataOfOrder>>> RESRDD = VehicleNumGroupRDD
+        JavaRDD<Tuple2<TaxiDataOfCar, Iterable<TaxiDataOfOrder>>> RESRDD = VehicleNumGroupRDD
                 .map(new CorrelationStatisticalAnalysis());
-
-
+//        RESRDD.foreach(x -> System.out.println(x));
+        JavaRDD<Tuple2<TaxiDataOfCar, Iterable<TaxiDataOfOrder>>> cache = RESRDD.cache();
+        //  出驻车统计数据入库
+        JavaRDD<TaxiDataOfCar> carRes = cache.map(new Function<Tuple2<TaxiDataOfCar, Iterable<TaxiDataOfOrder>>, TaxiDataOfCar>() {
+            @Override
+            public TaxiDataOfCar call(Tuple2<TaxiDataOfCar, Iterable<TaxiDataOfOrder>> v1) throws Exception {
+                return v1._1;
+            }
+        });
+        Dataset<Row> dataFrame = spark.createDataFrame(carRes, TaxiDataOfCar.class);
+        pcon.PushToPSql(dataFrame,"taxiDataOfCar","Overwrite");
+        JavaRDD<TaxiDataOfOrder> orderRes = cache.map(new Function<Tuple2<TaxiDataOfCar, Iterable<TaxiDataOfOrder>>, Iterable<TaxiDataOfOrder>>() {
+            @Override
+            public Iterable<TaxiDataOfOrder> call(Tuple2<TaxiDataOfCar, Iterable<TaxiDataOfOrder>> v1) throws Exception {
+                return v1._2;
+            }
+        }).flatMap(new FlatMapFunction<Iterable<TaxiDataOfOrder>, TaxiDataOfOrder>() {
+            @Override
+            public Iterator<TaxiDataOfOrder> call(Iterable<TaxiDataOfOrder> taxiDataOfOrders) throws Exception {
+                return taxiDataOfOrders.iterator();
+            }
+        });
+        Dataset<Row> dataFrame1 = spark.createDataFrame(orderRes, TaxiDataOfOrder.class);
+        pcon.PushToPSql(dataFrame1,"taxiDataOfOrder","overwrite");
 
     }
 }
