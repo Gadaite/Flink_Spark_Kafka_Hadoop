@@ -3,19 +3,26 @@ package GadaiteToolConnectDB;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.sql.Row;
-
-import java.beans.beancontext.BeanContext;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * made by Gadaite
+ */
 public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
     private PostgresqlConnect PSqlConnect = new PostgresqlConnect();
 
     private String TableName;
 
-    public PostgresSqlMaker(PostgresqlConnect PSqlConnect) {
+    /**
+     * 配合foreach对RDD中的数据进行入库
+     * @param PSqlConnect   PostgresqlConnect对象
+     * @param TableName     表名
+     */
+    public PostgresSqlMaker(PostgresqlConnect PSqlConnect, String TableName) {
         this.PSqlConnect = PSqlConnect;
+        this.TableName = TableName;
     }
 
     public PostgresSqlMaker(){}
@@ -26,6 +33,14 @@ public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
 
     public void setPSqlConnect(PostgresqlConnect PSqlConnect) {
         this.PSqlConnect = PSqlConnect;
+    }
+
+    public String getTableName() {
+        return TableName;
+    }
+
+    public void setTableName(String tableName) {
+        TableName = tableName;
     }
 
     /**
@@ -48,7 +63,8 @@ public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
             }
             buffer.append(joinerField.toString());
             buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
-            String sqlOfInsert = buffer.toString();
+            String sqlOfInsert = buffer.toString()
+                    .replace("timestamp","");
             PSqlConnect.ExecPSql(sqlOfInsert);
         });
     }
@@ -71,7 +87,8 @@ public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
         }
         buffer.append(joinerField.toString());
         buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
-        String sqlOfInsert = buffer.toString();
+        String sqlOfInsert = buffer.toString()
+                .replace("timestamp","");
 //            System.out.println(sqlOfInsert);
         PSqlConnect.ExecPSql(sqlOfInsert);
     }
