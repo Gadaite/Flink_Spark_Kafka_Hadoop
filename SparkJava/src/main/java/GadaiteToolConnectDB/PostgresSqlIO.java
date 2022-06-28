@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 /**
  * made by Gadaite
  */
-public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
+public class PostgresSqlIO implements Serializable , VoidFunction<Row> {
     private PostgresqlConnect PSqlConnect = new PostgresqlConnect();
 
     private String TableName;
@@ -20,12 +20,12 @@ public class PostgresSqlMaker implements Serializable , VoidFunction<Row> {
      * @param PSqlConnect   PostgresqlConnect对象
      * @param TableName     表名
      */
-    public PostgresSqlMaker(PostgresqlConnect PSqlConnect, String TableName) {
+    public PostgresSqlIO(PostgresqlConnect PSqlConnect, String TableName) {
         this.PSqlConnect = PSqlConnect;
         this.TableName = TableName;
     }
 
-    public PostgresSqlMaker(){}
+    public PostgresSqlIO(){}
 
     public PostgresqlConnect getPSqlConnect() {
         return PSqlConnect;
