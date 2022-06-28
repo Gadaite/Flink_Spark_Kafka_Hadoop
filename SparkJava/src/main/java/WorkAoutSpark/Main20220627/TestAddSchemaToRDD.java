@@ -2,7 +2,7 @@ package WorkAoutSpark.Main20220627;
 
 import GadaiteToolBaseSparkApp.GetDDL;
 import GadaiteToolBaseSparkApp.JavaRowRddAddSchema;
-import GadaiteToolConnectDB.PostgresSqlIO;
+import GadaiteToolConnectDB.PostgresSqlInsert;
 import GadaiteToolConnectDB.PostgresqlConnect;
 import GadaiteToolConnectDB.PostgresqlJdbcCon;
 import org.apache.spark.api.java.JavaRDD;
@@ -42,9 +42,9 @@ public class TestAddSchemaToRDD {
         /**
          * 测试数据入库,测试先前自定义的工具类
          */
-        new PostgresSqlIO().ExecInsert(ContainSchemeRDD,"test20220627");
+        new PostgresSqlInsert().ExecInsert(ContainSchemeRDD,"test20220627");
 
         PostgresqlConnect pSqlConnect = new PostgresqlConnect();
-        ContainSchemeRDD.foreach(new PostgresSqlIO(pSqlConnect,"test20220627"));
+        ContainSchemeRDD.foreach(new PostgresSqlInsert(pSqlConnect,"test20220627"));
     }
 }
