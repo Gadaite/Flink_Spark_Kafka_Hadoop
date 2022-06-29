@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 /**
  * made by Gadaite
  */
-public class PostgresSqlInsert implements Serializable , VoidFunction<Row> {
+public class PostgresSqlRowInsert implements Serializable , VoidFunction<Row> {
     private PostgresqlConnect PSqlConnect = new PostgresqlConnect();
 
     private String TableName;
@@ -20,12 +20,12 @@ public class PostgresSqlInsert implements Serializable , VoidFunction<Row> {
      * @param PSqlConnect   PostgresqlConnect对象
      * @param TableName     表名
      */
-    public PostgresSqlInsert(PostgresqlConnect PSqlConnect, String TableName) {
+    public PostgresSqlRowInsert(PostgresqlConnect PSqlConnect, String TableName) {
         this.PSqlConnect = PSqlConnect;
         this.TableName = TableName;
     }
 
-    public PostgresSqlInsert(){}
+    public PostgresSqlRowInsert(){}
 
     public PostgresqlConnect getPSqlConnect() {
         return PSqlConnect;
@@ -50,7 +50,7 @@ public class PostgresSqlInsert implements Serializable , VoidFunction<Row> {
      * @param TableName 上传的表名
      * @throws Exception
      */
-    public void ExecInsert(JavaRDD<Row> javaRDD, String TableName) throws Exception {
+    public void ExecInsertRow(JavaRDD<Row> javaRDD, String TableName) throws Exception {
         Map<String, String> nameMapType = PSqlConnect.GetColumnNameMapType(TableName);
         javaRDD.foreach(x ->{
             StringBuffer buffer = new StringBuffer();
@@ -59,7 +59,7 @@ public class PostgresSqlInsert implements Serializable , VoidFunction<Row> {
             buffer.append("INSERT INTO public.").append(TableName).append(" (");
             for (Map.Entry<String, String> entry : nameMapType.entrySet()){
                 joinerField.add(entry.getKey());
-                joinerValue.add(entry.getValue() + "('" + (x.get(x.fieldIndex(entry.getKey())).toString()) + "')");
+                joinerValue.add("'" + x.get(x.fieldIndex(entry.getKey())).toString() + "'");
             }
             buffer.append(joinerField.toString());
             buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
@@ -68,9 +68,10 @@ public class PostgresSqlInsert implements Serializable , VoidFunction<Row> {
             PSqlConnect.ExecPSql(sqlOfInsert);
         });
     }
+
     /**
      * made by Gadaite
-     * 使用Map算子实现并行写入到PostgresSql数据库
+     * 使用foreach算子实现并行写入到PostgresSql数据库
      * @param row JavaRDD<Row>
      * @throws Exception
      */
@@ -83,13 +84,11 @@ public class PostgresSqlInsert implements Serializable , VoidFunction<Row> {
         buffer.append("INSERT INTO public.").append(TableName).append(" (");
         for (Map.Entry<String, String> entry : nameMapType.entrySet()){
             joinerField.add(entry.getKey());
-            joinerValue.add(entry.getValue() + "('" + (row.get(row.fieldIndex(entry.getKey())).toString()) + "')");
+            joinerValue.add("'" + row.get(row.fieldIndex(entry.getKey())).toString() + "'");
         }
         buffer.append(joinerField.toString());
         buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
-        String sqlOfInsert = buffer.toString()
-                .replace("timestamp","");
-//            System.out.println(sqlOfInsert);
+        String sqlOfInsert = buffer.toString();
         PSqlConnect.ExecPSql(sqlOfInsert);
     }
 }
