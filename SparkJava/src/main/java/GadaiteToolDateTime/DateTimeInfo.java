@@ -1,4 +1,4 @@
-package GadaiteToolDataTime;
+package GadaiteToolDateTime;
 
 public class DateTimeInfo {
 }
