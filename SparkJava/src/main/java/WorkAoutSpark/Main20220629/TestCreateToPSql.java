@@ -29,16 +29,16 @@ public class TestCreateToPSql {
         JavaRDD<Trajectlonlathash9> trajectlonlathash9JavaRDD = javaRDD
                 .map(new RowToJavaBean<Trajectlonlathash9>(new GetDDL().GetGadaiteDDL(dataset), Trajectlonlathash9.class));
         //  M1:创建表实体类表
-//        new PostgresSqlEntityCreate().ExecCreateEntity(trajectlonlathash9JavaRDD,"test20220629");
+        new PostgresSqlEntityCreate().ExecCreateEntity(trajectlonlathash9JavaRDD,"test20220629");
         //  M2:创建表并写入数据实体类表
-//        new PostgresSqlEntityCreate().ExecMakeEntity(trajectlonlathash9JavaRDD,"test20220629");
+        new PostgresSqlEntityCreate().ExecMakeEntity(trajectlonlathash9JavaRDD,"test20220629");
         //  M3:创建表并写入数据实体类表
-//        trajectlonlathash9JavaRDD.foreach(new PostgresSqlEntityCreate<Trajectlonlathash9>(Trajectlonlathash9.class,
-//                new PostgresqlConnect(),"test20220629"));
+        trajectlonlathash9JavaRDD.foreach(new PostgresSqlEntityCreate<Trajectlonlathash9>(Trajectlonlathash9.class,
+                new PostgresqlConnect(),"test20220629"));
         //  M4:创建表Row表
-//        new PostgresSqlRowCreate().ExecCreateRow(javaRDD,"test20220629");
+        new PostgresSqlRowCreate().ExecCreateRow(javaRDD,"test20220629");
         //  M5:创建表并写入数据Row表
-//        new PostgresSqlRowCreate().ExecMakeRow(javaRDD,"test20220629");
+        new PostgresSqlRowCreate().ExecMakeRow(javaRDD,"test20220629");
         //  M6:创建表并写入数据Row表
         PostgresqlConnect postgresqlConnect = new PostgresqlConnect();
         javaRDD.foreach(new PostgresSqlRowCreate(javaRDD,postgresqlConnect,"test20220629"));
