@@ -56,9 +56,9 @@ public class EntityA implements Serializable {
     public String toString() {
         return "EntityA{" +
                 "allDuration=" + allDuration +
-                ", endPoint=" + endPoint +
-                ", endtTime=" + endtTime +
-                ", lineString=" + lineString +
+                "@ endPoint=" + endPoint +
+                "@ endtTime=" + endtTime +
+                "@ lineString=" + lineString +
                 '}';
     }
 }

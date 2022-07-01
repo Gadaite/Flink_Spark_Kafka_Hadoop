@@ -23,6 +23,7 @@ public class PostgresSqlRowCreate implements Serializable, VoidFunction<Row> {
         map.put("int","int4");
         map.put("integer","int4");
         map.put("date","timestamp");
+        map.put("string","text");
     }
 
     private JavaRDD<Row> javaRDD;

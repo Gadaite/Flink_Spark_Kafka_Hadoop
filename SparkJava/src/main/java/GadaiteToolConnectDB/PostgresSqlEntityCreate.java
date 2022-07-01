@@ -24,6 +24,7 @@ public class PostgresSqlEntityCreate<T> implements Serializable, VoidFunction<T>
         map.put("int","int4");
         map.put("integer","int4");
         map.put("date","timestamp");
+        map.put("string","text");
     }
     private Class<T> clazz;
     private PostgresqlConnect PSqlConnect = new PostgresqlConnect();

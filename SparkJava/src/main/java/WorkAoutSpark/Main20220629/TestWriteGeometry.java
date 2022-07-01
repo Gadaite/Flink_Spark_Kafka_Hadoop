@@ -48,9 +48,10 @@ public class TestWriteGeometry {
             }
         });
         JavaRDD<EntityA> cache = entityAJavaRDD.cache();
-        cache.foreach(x -> System.out.println(x));
         //  建表
-        new PostgresSqlEntityCreate().ExecCreateEntity(cache,"testA");
-        new PostgresSqlEntityInsert().ExecInsertEntity(cache,"testA");
+//        new PostgresSqlEntityCreate().ExecCreateEntity(cache,"testA");
+//        new PostgresSqlEntityInsert().ExecInsertEntity(cache,"testa");
+//        new PostgresSqlRowCreate().ExecCreateRow(javaRDD,"testb");
+        new PostgresSqlRowInsert().ExecInsertRow(javaRDD,"testb");
     }
 }

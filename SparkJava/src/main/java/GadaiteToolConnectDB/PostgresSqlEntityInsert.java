@@ -1,15 +1,15 @@
 package GadaiteToolConnectDB;
 
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.sources.In;
 
 import java.io.Serializable;
+import java.io.StringReader;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class PostgresSqlEntityInsert<T> implements Serializable, VoidFunction<T> {
 
@@ -92,16 +92,24 @@ public class PostgresSqlEntityInsert<T> implements Serializable, VoidFunction<T>
 
     public void ExecInsertEntity(JavaRDD<T> javaRDD, String TableName) throws Exception {
         Map<String, String> nameMapType = PSqlConnect.GetColumnNameMapType(TableName);
-        String s = javaRDD.take(1).get(0).toString();
-        String[] split = s.substring(s.indexOf("[") + 1, s.indexOf("]")).split(",");
-        Map<String, String> nameMapValue = new HashMap<>();
-        for (String str : split){
-            String[] fieldAndValue = str.replaceFirst(" ", "").split("=");
-            nameMapValue.put(fieldAndValue[0],fieldAndValue[1]);
-        }
         javaRDD.foreach(x ->{
             StringBuffer buffer = new StringBuffer();
-            String s1 = x.toString();
+            String s = x.toString();
+            String[] split;
+            if (s.contains("{")){
+                if (s.contains("@")){
+                    split = s.substring(s.indexOf("{") + 1, s.indexOf("}")).split("@");
+                }else{
+                    split = s.substring(s.indexOf("{") + 1, s.indexOf("}")).split(",");
+                }
+            }else {
+                split = s.substring(s.indexOf("[") + 1, s.indexOf("]")).split(",");
+            }
+            Map<String, String> nameMapValue = new HashMap<>();
+            for (String str : split){
+                String[] fieldAndValue = str.replaceFirst(" ", "").split("=");
+                nameMapValue.put(fieldAndValue[0].toLowerCase(),fieldAndValue[1]);
+            }
             StringJoiner joinerField = new StringJoiner(" , ");
             StringJoiner joinerValue = new StringJoiner(" , ");
             buffer.append("INSERT INTO public.").append(TableName).append(" (");
@@ -112,6 +120,7 @@ public class PostgresSqlEntityInsert<T> implements Serializable, VoidFunction<T>
             buffer.append(joinerField.toString());
             buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
             String sqlOfInsert = buffer.toString();
+            nameMapValue.clear();
             PSqlConnect.ExecPSql(sqlOfInsert);
         });
     }

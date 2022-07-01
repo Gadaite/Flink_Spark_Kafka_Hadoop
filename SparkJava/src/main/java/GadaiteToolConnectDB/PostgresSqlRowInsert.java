@@ -1,8 +1,14 @@
 package GadaiteToolConnectDB;
 
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.RowFactory;
+import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
+import org.apache.spark.sql.types.StructField;
+import org.apache.spark.sql.types.StructType;
+
 import java.io.Serializable;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -52,14 +58,27 @@ public class PostgresSqlRowInsert implements Serializable , VoidFunction<Row> {
      */
     public void ExecInsertRow(JavaRDD<Row> javaRDD, String TableName) throws Exception {
         Map<String, String> nameMapType = PSqlConnect.GetColumnNameMapType(TableName);
-        javaRDD.foreach(x ->{
+        String s = javaRDD.first().schema().simpleString().toLowerCase();
+        String newSchema = s.substring(s.indexOf("<") + 1, s.indexOf(">")).replace(":"," ");
+        JavaRDD<Row> rowJavaRDD = javaRDD.map(new Function<Row, Row>() {
+            @Override
+            public Row call(Row v1) throws Exception {
+                int length = v1.length();
+                Object[] objects = new Object[length];
+                for (int i=0;i<length;i++){
+                    objects[i] = v1.get(i);
+                }
+                return new GenericRowWithSchema(objects, StructType.fromDDL(newSchema));
+            }
+        });
+        rowJavaRDD.foreach(x ->{
             StringBuffer buffer = new StringBuffer();
             StringJoiner joinerField = new StringJoiner(" , ");
             StringJoiner joinerValue = new StringJoiner(" , ");
             buffer.append("INSERT INTO public.").append(TableName).append(" (");
             for (Map.Entry<String, String> entry : nameMapType.entrySet()){
                 joinerField.add(entry.getKey());
-                joinerValue.add("'" + x.get(x.fieldIndex(entry.getKey())).toString() + "'");
+                joinerValue.add("'" + x.get(x.fieldIndex(entry.getKey().toLowerCase())).toString() + "'");
             }
             buffer.append(joinerField.toString());
             buffer.append(") VALUES(").append(joinerValue.toString()).append(")");
