@@ -52,4 +52,41 @@
         <property name="name" value="&lt;&gt;?&lt;&gt;"/>
         <property name="sex" value="male"/>
     </bean>
+
+    <!-->创建service和dao的对象,外部Bean的注入<-->
+    <bean id="userService" class="ServiceAndDao.Service.UserService">
+        <!-->service中注入Dao的对象<-->
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="userDao" class="ServiceAndDao.Dao.UserDaoImpl"/>
+
+    <!-->内部Bean注入操作<-->
+    <bean id="emp" class="JavaBean.Emp">
+        <property name="ename" value="Gadaite"/>
+        <property name="gender" value="male"/>
+        <property name="dept">
+            <bean id="dept" class="JavaBean.Dept">
+                <property name="dname" value="technology"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-->级联赋值M1<-->
+    <bean id="emp2" class="JavaBean.Emp">
+        <property name="ename" value="Gadaite"/>
+        <property name="gender" value="male"/>
+        <property name="dept" ref="dept2"/>
+    </bean>
+    <bean id="dept2" class="JavaBean.Dept">
+        <property name="dname" value="Finance"/>
+    </bean>
+    <!-->级联赋值M2<-->
+    <bean id="emp3" class="JavaBean.Emp">
+        <property name="ename" value="Gadaite"/>
+        <property name="gender" value="male"/>
+        <property name="dept" ref="dept3"/>
+        <!--需要在类中使用Get方法拿到属性对应的值-->
+        <property name="dept.dname" value="Personnel"/>
+    </bean>
+    <bean id="dept3" class="JavaBean.Dept"/>
 </beans>
