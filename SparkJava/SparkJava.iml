@@ -273,8 +273,6 @@
     <orderEntry type="library" name="Maven: org.geotools:gt-geojson:20.5" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-geometry:20.5" level="project" />
-    <orderEntry type="library" name="Maven: org.locationtech.geomesa:geomesa-spark-jts_2.11:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.locationtech.jts.io:jts-io-common:1.16.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hbase:hbase-client:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hbase.thirdparty:hbase-shaded-protobuf:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hbase:hbase-hadoop-compat:2.1.1" level="project" />
@@ -312,6 +310,7 @@
     <orderEntry type="library" name="Maven: org.apache.hbase:hbase-mapreduce:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hbase:hbase-common:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.stephenc.findbugs:findbugs-annotations:1.3.9-1" level="project" />
+    <orderEntry type="library" name="Maven: org.geotools:gt-jts-wrapper:20.5" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-main:20.5" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-epsg-hsql:20.5" level="project" />
     <orderEntry type="library" name="Maven: org.hsqldb:hsqldb:2.4.1" level="project" />

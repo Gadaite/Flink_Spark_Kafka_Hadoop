@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-->M1无参构造<-->
+    <bean id="student" class="QuickStart.Student"/>
+    <!-->M2申明对象,并进行实例<-->
+    <bean id="student2" class="QuickStart.Student">
+        <property name="name" value="xiaobao"/>
+        <property name="age" value="23"/>
+        <property name="sex" value="male"/>
+    </bean>
+    <!-->M3有参构造创建属性<-->
+    <bean id="student3" class="QuickStart.Student">
+        <constructor-arg name="name" value="chuyu"/>
+        <constructor-arg name="age" value="24"/>
+        <constructor-arg name="sex" value="male"/>
+    </bean>
+    <!-->M4使用命名空间<-->
+    <bean id="student4" class="QuickStart.Student" p:age="24" p:sex="male" p:name="59"/>
+
+    <!-->null值设定<-->
+    <bean id="student1" class="Literal.Student">
+        <property name="name" value="xiaobao"/>
+        <property name="sex">
+            <null/>
+        </property>
+        <property name="age" value="24"/>
+    </bean>
+    <bean id="student5" class="Literal.Student">
+        <property name="age">
+            <null/>
+        </property>
+        <property name="name" value="Gadaite"/>
+        <property name="sex" value="male"/>
+    </bean>
+    <bean id="student6" class="Literal.Student">
+        <property name="age">
+            <null/>
+        </property>
+        <property name="name">
+            <value><![CDATA[<<<<>?><><>><>>>]]></value>
+        </property>
+        <property name="sex" value="male"/>
+    </bean>
+    <bean id="student7" class="Literal.Student">
+        <property name="age">
+            <null/>
+        </property>
+        <property name="name" value="&lt;&gt;?&lt;&gt;"/>
+        <property name="sex" value="male"/>
+    </bean>
+</beans>
