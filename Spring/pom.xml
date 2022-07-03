@@ -13,6 +13,12 @@
             <artifactId>spring-webmvc</artifactId>
             <version>5.3.8</version>
         </dependency>
+        <!-- junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
     </dependencies>
     <reporting>
         <plugins>

@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-->M1无参构造<-->
     <bean id="student" class="QuickStart.Student"/>
@@ -89,4 +91,60 @@
         <property name="dept.dname" value="Personnel"/>
     </bean>
     <bean id="dept3" class="JavaBean.Dept"/>
+    <bean id="stu1" class="CollectionXml.Stu">
+        <property name="cource">
+            <array>
+                <value>hadoop</value>
+                <value>flink</value>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <value>Gadaite</value>
+                <value>xiaobao</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="xiaobao" value="Java"/>
+                <entry key="Gadaite" value="Scala"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>mysql</value>
+                <value>redis</value>
+            </set>
+        </property>
+        <property name="courceList">
+            <list>
+                <ref bean="cource1"/>
+                <ref bean="cource2"/>
+                <ref bean="cource3"/>
+                <ref bean="cource3"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="cource1" class="CollectionXml.Cource"><property name="cource" value="Hadoop"/> </bean>
+    <bean id="cource2" class="CollectionXml.Cource"><property name="cource" value="Hdfs"/> </bean>
+    <bean id="cource3" class="CollectionXml.Cource"><property name="cource" value="Hive"/> </bean>
+    <bean id="cource4" class="CollectionXml.Cource"><property name="cource" value="HBase"/> </bean>
+    <!--公共值抽取以及注入-->
+    <util:list id="listtest">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+    </util:list>
+    <bean id="list1" class="CollectionXml.ListPojo">
+        <property name="list" ref="listtest"/>
+    </bean>
+
+    <bean id="fb1" class="FactoryBeans.MyBean">
+    </bean>
+
+    <bean id="a1" class="CollectionXml.Cource" scope="prototype"><property name="cource" value="Spark"/> </bean>
+
+    <bean id="cycle1" class="JavaBean.Life" init-method="init" destroy-method="drop">
+        <property name="string" value="any"/>
+    </bean>
 </beans>

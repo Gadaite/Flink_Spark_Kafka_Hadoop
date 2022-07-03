@@ -28,7 +28,7 @@
       <module name="Kafka" target="1.8" />
       <module name="Spark" target="1.8" />
       <module name="SparkJava" target="1.8" />
-      <module name="Spring" target="1.8" />
+      <module name="Spring" target="1.5" />
       <module name="Sqoop" target="1.8" />
     </bytecodeTargetLevel>
   </component>
