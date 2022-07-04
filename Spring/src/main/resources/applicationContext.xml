@@ -147,4 +147,16 @@
     <bean id="cycle1" class="JavaBean.Life" init-method="init" destroy-method="drop">
         <property name="string" value="any"/>
     </bean>
+
+    <!-->配置后置处理器方法<-->
+    <bean id="MyBeanPost" class="JavaBean.MyBeanPost" />
+    <bean id="MyBean" class="Assembly.ManualAssembly.BeanPostClass"/>
+
+
+    <!-->手动装配<-->
+    <bean id="emp4" class="Assembly.ManualAssembly.Emp">
+        <property name="dept" ref="dept4"/>
+    </bean>
+    <bean id="dept4" class="Assembly.ManualAssembly.Dept"/>
+
 </beans>
