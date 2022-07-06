@@ -6,6 +6,9 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.UUID;
 
+/**
+ * JDK的动态代理
+ */
 public class JDKProxy {
     public static void main(String[] args) {
 
