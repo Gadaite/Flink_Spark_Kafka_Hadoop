@@ -7,15 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Spark" />
-        <module name="Hadoop" />
-        <module name="Sqoop" />
         <module name="Spring" />
+        <module name="Kafka" />
+        <module name="Sqoop" />
+        <module name="Spark" />
         <module name="Flink" />
         <module name="Hbase" />
         <module name="Hive" />
         <module name="SparkJava" />
-        <module name="Kafka" />
+        <module name="Hadoop" />
         <module name="ElasticSearch" />
       </profile>
     </annotationProcessing>
@@ -28,7 +28,7 @@
       <module name="Kafka" target="1.8" />
       <module name="Spark" target="1.8" />
       <module name="SparkJava" target="1.8" />
-      <module name="Spring" target="1.5" />
+      <module name="Spring" target="1.8" />
       <module name="Sqoop" target="1.8" />
     </bytecodeTargetLevel>
   </component>
