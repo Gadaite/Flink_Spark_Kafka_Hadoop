@@ -9,9 +9,13 @@
       <module fileurl="file://$PROJECT_DIR$/Hbase/Hbase.iml" filepath="$PROJECT_DIR$/Hbase/Hbase.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hive/Hive.iml" filepath="$PROJECT_DIR$/Hive/Hive.iml" />
       <module fileurl="file://$PROJECT_DIR$/Kafka/Kafka.iml" filepath="$PROJECT_DIR$/Kafka/Kafka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatis/MyBatis.iml" filepath="$PROJECT_DIR$/MyBatis/MyBatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/Spark/Spark.iml" filepath="$PROJECT_DIR$/Spark/Spark.iml" />
       <module fileurl="file://$PROJECT_DIR$/SparkJava/SparkJava.iml" filepath="$PROJECT_DIR$/SparkJava/SparkJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/Spring/Spring.iml" filepath="$PROJECT_DIR$/Spring/Spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringBoot/SpringBoot.iml" filepath="$PROJECT_DIR$/SpringBoot/SpringBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringEcology/SpringEcology.iml" filepath="$PROJECT_DIR$/SpringEcology/SpringEcology.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringMVC/SpringMVC.iml" filepath="$PROJECT_DIR$/SpringMVC/SpringMVC.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sqoop/Sqoop.iml" filepath="$PROJECT_DIR$/Sqoop/Sqoop.iml" />
     </modules>
   </component>
