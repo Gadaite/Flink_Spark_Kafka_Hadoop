@@ -8,12 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ElasticSearch" />
-        <module name="Hadoop" />
+        <module name="Sqoop" />
         <module name="Hbase" />
         <module name="SpringMVC" />
         <module name="SpringEcology" />
         <module name="Flink" />
-        <module name="Sqoop" />
+        <module name="Hadoop" />
         <module name="Spring" />
         <module name="Hive" />
         <module name="SpringBoot" />
@@ -30,7 +30,7 @@
       <module name="Hbase" target="1.8" />
       <module name="Hive" target="1.8" />
       <module name="Kafka" target="1.8" />
-      <module name="MyBatis" target="1.5" />
+      <module name="MyBatis" target="1.8" />
       <module name="Spark" target="1.8" />
       <module name="SparkJava" target="1.8" />
       <module name="Spring" target="1.8" />

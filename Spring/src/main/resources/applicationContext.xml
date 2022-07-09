@@ -56,11 +56,11 @@
     </bean>
 
     <!-->创建service和dao的对象,外部Bean的注入<-->
-    <bean id="userService" class="ServiceAndDao.Service.UserService">
+    <bean id="userService" class="ServiceAndDao.PackageOne.Service.UserService">
         <!-->service中注入Dao的对象<-->
         <property name="userDao" ref="userDao"/>
     </bean>
-    <bean id="userDao" class="ServiceAndDao.Dao.UserDaoImpl"/>
+    <bean id="userDao" class="ServiceAndDao.PackageOne.Dao.UserDaoImpl"/>
 
     <!-->内部Bean注入操作<-->
     <bean id="emp" class="JavaBean.Emp">

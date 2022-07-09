@@ -705,7 +705,7 @@
     <description>
       Specify the maximum number of connections in the connection pool. Note: The configured size will be used by
        2 connection pools (TxnHandler and ObjectStore). When configuring the max connection pool size, it is 
-      recommended to take into account the number of metastore instances and the number of HiveServer2 instances 
+      recommended to take into accountDao the number of metastore instances and the number of HiveServer2 instances
       configured with embedded metastore. To get optimal performance, set config to meet the following condition
       (2 * pool_size * metastore_instances + 2 * pool_size * HS2_instances_with_embedded_metastore) = 
       (2 * physical_core_count + hard_disk_count).
@@ -2757,7 +2757,7 @@
       of basic statistics like number of rows and data size, file size is used to estimate the number
       of rows and data size. Since files in tables/partitions are serialized (and optionally
       compressed) the estimates of number of rows and data size cannot be reliably determined.
-      This factor is multiplied with the file size to account for serialization and compression.
+      This factor is multiplied with the file size to accountDao for serialization and compression.
     </description>
   </property>
   <property>
@@ -4051,7 +4051,7 @@
   <property>
     <name>hive.server2.thrift.http.cookie.domain</name>
     <value/>
-    <description>Domain for the HS2 generated cookies</description>
+    <description>PackageOne.Domain for the HS2 generated cookies</description>
   </property>
   <property>
     <name>hive.server2.thrift.http.cookie.path</name>
@@ -4250,7 +4250,7 @@
     <description>LDAP base DN</description>
   </property>
   <property>
-    <name>hive.server2.authentication.ldap.Domain</name>
+    <name>hive.server2.authentication.ldap.PackageOne.Domain</name>
     <value/>
     <description/>
   </property>
@@ -4329,8 +4329,8 @@
     <description>
       A full LDAP query that LDAP Atn provider uses to execute against LDAP Server.
       If this query returns a null resultset, the LDAP Provider fails the Authentication
-      request, succeeds if the user is part of the resultset.For example: (&amp;(objectClass=group)(objectClass=top)(instanceType=4)(cn=Domain*)) 
-      (&amp;(objectClass=person)(|(sAMAccountName=admin)(|(memberOf=CN=Domain Admins,CN=Users,DC=domain,DC=com)(memberOf=CN=Administrators,CN=Builtin,DC=domain,DC=com))))
+      request, succeeds if the user is part of the resultset.For example: (&amp;(objectClass=group)(objectClass=top)(instanceType=4)(cn=PackageOne.Domain*))
+      (&amp;(objectClass=person)(|(sAMAccountName=admin)(|(memberOf=CN=PackageOne.Domain Admins,CN=Users,DC=domain,DC=com)(memberOf=CN=Administrators,CN=Builtin,DC=domain,DC=com))))
     </description>
   </property>
   <property>
@@ -5906,7 +5906,7 @@
   </property>
   <property>
     <name>hive.conf.restricted.list</name>
-    <value>hive.security.authenticator.manager,hive.security.authorization.manager,hive.security.metastore.authorization.manager,hive.security.metastore.authenticator.manager,hive.users.in.admin.role,hive.server2.xsrf.filter.enabled,hive.security.authorization.enabled,hive.server2.authentication.ldap.baseDN,hive.server2.authentication.ldap.url,hive.server2.authentication.ldap.Domain,hive.server2.authentication.ldap.groupDNPattern,hive.server2.authentication.ldap.groupFilter,hive.server2.authentication.ldap.userDNPattern,hive.server2.authentication.ldap.userFilter,hive.server2.authentication.ldap.groupMembershipKey,hive.server2.authentication.ldap.userMembershipKey,hive.server2.authentication.ldap.groupClassKey,hive.server2.authentication.ldap.customLDAPQuery</value>
+    <value>hive.security.authenticator.manager,hive.security.authorization.manager,hive.security.metastore.authorization.manager,hive.security.metastore.authenticator.manager,hive.users.in.admin.role,hive.server2.xsrf.filter.enabled,hive.security.authorization.enabled,hive.server2.authentication.ldap.baseDN,hive.server2.authentication.ldap.url,hive.server2.authentication.ldap.PackageOne.Domain,hive.server2.authentication.ldap.groupDNPattern,hive.server2.authentication.ldap.groupFilter,hive.server2.authentication.ldap.userDNPattern,hive.server2.authentication.ldap.userFilter,hive.server2.authentication.ldap.groupMembershipKey,hive.server2.authentication.ldap.userMembershipKey,hive.server2.authentication.ldap.groupClassKey,hive.server2.authentication.ldap.customLDAPQuery</value>
     <description>Comma separated list of configuration options which are immutable at runtime</description>
   </property>
   <property>

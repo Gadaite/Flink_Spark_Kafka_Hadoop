@@ -8,12 +8,12 @@
                            http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd
                            http://www.springframework.org/schema/context   http://www.springframework.org/schema/context/spring-context.xsd">
     <!--开启组件扫描-->
-<!--    <context:component-scan base-package="Annotation.Dao,Annotation.Service" use-default-filters="false">-->
+<!--    <context:component-scan base-package="Annotation.PackageOne.Dao,Annotation.PackageOne.Service" use-default-filters="false">-->
         <!--扫描的文件-->
-<!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+<!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.PackageOne.Service"/>-->
         <!--不扫描的文件-->
 <!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
 <!--    </context:component-scan>-->
     <!--开启组件扫描-->
-        <context:component-scan base-package="Annotation.Dao,Annotation.Service" />
+        <context:component-scan base-package="Annotation.PackageOne.Dao,Annotation.PackageOne.Service" />
 </beans>

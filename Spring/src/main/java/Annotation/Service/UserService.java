@@ -35,7 +35,7 @@ public class UserService {
     @Value(value = "Gadaite")
     private String name;
     public void test(){
-        System.out.println("Service");
+        System.out.println("PackageOne.Service");
         userDao.dao();
         System.out.println(name);
     }

@@ -30,7 +30,7 @@ public class UserService {
     @Value(value = "Gadaite")
     private String name;
     public void test(){
-        System.out.println("Service without xml");
+        System.out.println("PackageOne.Service without xml");
         userDao.dao();
         System.out.println(name);
     }
