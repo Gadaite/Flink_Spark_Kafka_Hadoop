@@ -4051,7 +4051,7 @@
   <property>
     <name>hive.server2.thrift.http.cookie.domain</name>
     <value/>
-    <description>PackageOne.Domain for the HS2 generated cookies</description>
+    <description>Package1st.Domain for the HS2 generated cookies</description>
   </property>
   <property>
     <name>hive.server2.thrift.http.cookie.path</name>
@@ -4250,7 +4250,7 @@
     <description>LDAP base DN</description>
   </property>
   <property>
-    <name>hive.server2.authentication.ldap.PackageOne.Domain</name>
+    <name>hive.server2.authentication.ldap.Package1st.Domain</name>
     <value/>
     <description/>
   </property>
@@ -4327,10 +4327,11 @@
     <name>hive.server2.authentication.ldap.customLDAPQuery</name>
     <value/>
     <description>
-      A full LDAP query that LDAP Atn provider uses to execute against LDAP Server.
-      If this query returns a null resultset, the LDAP Provider fails the Authentication
-      request, succeeds if the user is part of the resultset.For example: (&amp;(objectClass=group)(objectClass=top)(instanceType=4)(cn=PackageOne.Domain*))
-      (&amp;(objectClass=person)(|(sAMAccountName=admin)(|(memberOf=CN=PackageOne.Domain Admins,CN=Users,DC=domain,DC=com)(memberOf=CN=Administrators,CN=Builtin,DC=domain,DC=com))))
+        A full LDAP query that LDAP Atn provider uses to execute against LDAP Server.
+        If this query returns a null resultset, the LDAP Provider fails the Authentication
+        request, succeeds if the user is part of the resultset.For example: (&amp;(objectClass=group)(objectClass=top)(instanceType=4)(cn=Package1st.Domain*))
+        (&amp;(objectClass=person)(|(sAMAccountName=admin)(|(memberOf=CN=Package1st.Domain
+        Admins,CN=Users,DC=domain,DC=com)(memberOf=CN=Administrators,CN=Builtin,DC=domain,DC=com))))
     </description>
   </property>
   <property>
@@ -5906,7 +5907,7 @@
   </property>
   <property>
     <name>hive.conf.restricted.list</name>
-    <value>hive.security.authenticator.manager,hive.security.authorization.manager,hive.security.metastore.authorization.manager,hive.security.metastore.authenticator.manager,hive.users.in.admin.role,hive.server2.xsrf.filter.enabled,hive.security.authorization.enabled,hive.server2.authentication.ldap.baseDN,hive.server2.authentication.ldap.url,hive.server2.authentication.ldap.PackageOne.Domain,hive.server2.authentication.ldap.groupDNPattern,hive.server2.authentication.ldap.groupFilter,hive.server2.authentication.ldap.userDNPattern,hive.server2.authentication.ldap.userFilter,hive.server2.authentication.ldap.groupMembershipKey,hive.server2.authentication.ldap.userMembershipKey,hive.server2.authentication.ldap.groupClassKey,hive.server2.authentication.ldap.customLDAPQuery</value>
+    <value>hive.security.authenticator.manager,hive.security.authorization.manager,hive.security.metastore.authorization.manager,hive.security.metastore.authenticator.manager,hive.users.in.admin.role,hive.server2.xsrf.filter.enabled,hive.security.authorization.enabled,hive.server2.authentication.ldap.baseDN,hive.server2.authentication.ldap.url,hive.server2.authentication.ldap.Package1st.Domain,hive.server2.authentication.ldap.groupDNPattern,hive.server2.authentication.ldap.groupFilter,hive.server2.authentication.ldap.userDNPattern,hive.server2.authentication.ldap.userFilter,hive.server2.authentication.ldap.groupMembershipKey,hive.server2.authentication.ldap.userMembershipKey,hive.server2.authentication.ldap.groupClassKey,hive.server2.authentication.ldap.customLDAPQuery</value>
     <description>Comma separated list of configuration options which are immutable at runtime</description>
   </property>
   <property>

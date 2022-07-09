@@ -19,6 +19,6 @@
         </environment>
     </environments>
     <mappers>
-        <package name="PackageOne.Dao"/>
+        <package name="Package1st.Dao"/>
     </mappers>
 </configuration>
