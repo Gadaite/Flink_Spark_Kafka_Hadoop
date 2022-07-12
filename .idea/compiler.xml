@@ -34,7 +34,7 @@
       <module name="Spark" target="1.8" />
       <module name="SparkJava" target="1.8" />
       <module name="Spring" target="1.8" />
-      <module name="SpringBoot" target="1.5" />
+      <module name="SpringBoot" target="1.8" />
       <module name="SpringEcology" target="1.8" />
       <module name="SpringMVC" target="1.5" />
       <module name="Sqoop" target="1.8" />
@@ -42,6 +42,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SpringBoot" options="-parameters" />
       <module name="SpringEcology" options="-parameters" />
     </option>
   </component>
