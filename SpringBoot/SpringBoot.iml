@@ -81,5 +81,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.springframework.boot:spring-boot-devtools:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.16" level="project" />
   </component>
 </module>
