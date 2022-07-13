@@ -1,10 +1,27 @@
 server:
-  port: 8888
+  port: 2345
 spring:
   datasource:
     url: jdbc:mysql://192.168.1.10:3306/SPRING?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: LYP809834049
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    root: info
+
+authorInfo:
+  name: Gadaite
+  age: 24
+  tel: 182****1811
+  mail: rangeyang22@gmail.com
+
+# 测试部分
+entityfromprop:
+  info: 将配置文件中的数据封装到我们自定义的实体类对象(测试)
+
+
