@@ -16,7 +16,16 @@ import java.util.Properties;
  */
 public class MysqlJdbcCon extends BaseSparkENV implements Serializable {
 
-    Properties properties = new Properties();
+    private Properties properties = new Properties();
+
+    public Properties getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
     public MysqlJdbcCon() {
     }
     public Properties init() throws Exception{
